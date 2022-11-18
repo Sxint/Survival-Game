@@ -14,7 +14,7 @@ namespace GameTemplate
         private SpriteBatch spriteBatch;
         private Game1 g;
         //declare all game related components
-        private Bat bat;
+        private Player bat;
         public ActionScene(Game game) : base(game)
         {
             g = (Game1)game;
@@ -23,7 +23,7 @@ namespace GameTemplate
             Vector2 batPos = new Vector2(Shared.stage.X / 2 - batTex.Width / 2,
                 Shared.stage.Y - batTex.Height);
             Vector2 batSpeed = new Vector2(4, 0);
-            bat = new Bat(game, spriteBatch, batTex, batPos, batSpeed);
+            bat = new Player(game, spriteBatch, batTex, batPos, batSpeed);
             this.components.Add(bat);
 
         }
