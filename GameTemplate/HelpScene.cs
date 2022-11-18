@@ -19,7 +19,7 @@ namespace GameTemplate
         {
             g = (Game1)game;
             this.spriteBatch = g._spriteBatch;
-            tex = g.Content.Load<Texture2D>("images/help");
+            tex = g.Content.Load<Texture2D>("images/help2");
         }
 
         public override void Draw(GameTime gameTime)
