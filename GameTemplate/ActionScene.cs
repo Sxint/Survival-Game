@@ -19,7 +19,7 @@ namespace GameTemplate
         {
             g = (Game1)game;
             this.spriteBatch = g._spriteBatch;
-            Texture2D batTex = g.Content.Load<Texture2D>("images/Bat");
+            Texture2D batTex = g.Content.Load<Texture2D>("images/player");
             Vector2 batPos = new Vector2(Shared.stage.X / 2 - batTex.Width / 2,
                 Shared.stage.Y - batTex.Height);
             Vector2 batSpeed = new Vector2(4, 0);
