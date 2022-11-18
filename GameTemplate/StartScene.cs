@@ -16,7 +16,7 @@ namespace GameTemplate
 
         private SpriteBatch spriteBatch;
         Game1 g;
-        string[] menuItems = {"Start game", "Help", "High score", "Credit", "Quit" };
+        string[] menuItems = {"Start", "Help", "High score", "Credit", "Quit" };
 
 
         public StartScene(Game game) : base(game)
