@@ -9,14 +9,16 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameTemplate
 {
-    public class Bat : DrawableGameComponent
+    public class Player : DrawableGameComponent
     {
         public SpriteBatch spriteBatch { get; set; }
         public Texture2D tex { get; set; }
         public Vector2 position { get; set; }
         public Vector2 speed { get; set; }
+      
 
-        public Bat(Game game, SpriteBatch spriteBatch,
+
+        public Player(Game game, SpriteBatch spriteBatch,
             Texture2D tex, Vector2 position,
             Vector2 speed) : base(game)
         {
@@ -26,6 +28,7 @@ namespace GameTemplate
             this.speed = speed;
         }
 
+ 
 
         public override void Update(GameTime gameTime)
         {
@@ -35,7 +38,7 @@ namespace GameTemplate
             //KeyboardState x = new KeyboardState();
             //------------------------------------------
 
-            if (ks.IsKeyDown(Keys.Left))
+            if (ks.IsKeyDown(Keys.A))
             {
                 position -= speed;
                 if (position.X < 0)
@@ -43,13 +46,17 @@ namespace GameTemplate
                     position = new Vector2(0, position.Y);
                 }
             }
-            if (ks.IsKeyDown(Keys.Right))
+            if (ks.IsKeyDown(Keys.D))
             {
                 position += speed;
                 if (position.X > Shared.stage.X - tex.Width)
                 {
                     this.position = new Vector2(Shared.stage.X - tex.Width, position.Y);
                 }
+            }
+            if (ks.IsKeyDown(Keys.W))
+            {
+               
             }
 
             base.Update(gameTime);
