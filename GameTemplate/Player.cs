@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.Direct3D9;
 
 namespace GameTemplate
 {
@@ -15,20 +16,23 @@ namespace GameTemplate
         public Texture2D tex { get; set; }
         public Vector2 position { get; set; }
         public Vector2 speed { get; set; }
-      
+        public string test { get; set; }
+
+
 
 
         public Player(Game game, SpriteBatch spriteBatch,
             Texture2D tex, Vector2 position,
-            Vector2 speed) : base(game)
+            Vector2 speed, string test) : base(game)
         {
             this.spriteBatch = spriteBatch;
             this.tex = tex;
             this.position = position;
             this.speed = speed;
+            this.test = test;
         }
 
- 
+
 
         public override void Update(GameTime gameTime)
         {
@@ -54,21 +58,27 @@ namespace GameTemplate
                     this.position = new Vector2(Shared.stage.X - tex.Width, position.Y);
                 }
             }
+
+            //added rudimentary jumping function (still need to fix)
             if (ks.IsKeyDown(Keys.W))
             {
-               
+                this.position = new Vector2(this.position.X, this.position.Y - (float)gameTime.ElapsedGameTime.TotalMilliseconds);
             }
 
             base.Update(gameTime);
         }
         public override void Draw(GameTime gameTime)
         {
+            SpriteFont regular = Game.Content.Load<SpriteFont>("fonts/regularFont");
             spriteBatch.Begin();
             spriteBatch.Draw(tex, position, Color.White);
+            spriteBatch.DrawString(regular, "test", new Vector2(position.X, position.Y), Color.White);
             spriteBatch.End();
             base.Draw(gameTime);
         }
 
+
+        //hitbox
         public Rectangle getBounds()
         {
             return new Rectangle((int)position.X, (int)position.Y, tex.Width, tex.Height);
