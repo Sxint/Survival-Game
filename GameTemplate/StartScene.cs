@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameTemplate
 {
+    //this is the main menu
     public class StartScene : GameScene
     {
         //menu will be declared
@@ -28,8 +29,6 @@ namespace GameTemplate
             SpriteFont hilight = game.Content.Load<SpriteFont>("fonts/hilightFont");
             menu = new MenuComponent(game, spriteBatch, regular, hilight, menuItems);
             this.components.Add(menu);
-
-
         }
     }
 }
