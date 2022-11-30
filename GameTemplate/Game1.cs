@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Survive;
 
 namespace GameTemplate
 {
@@ -12,6 +13,8 @@ namespace GameTemplate
         private StartScene startScene;
         private HelpScene helpScene;
         private ActionScene actionScene;
+        private Player player;
+        private Platform platform;
 
 
         public Game1()

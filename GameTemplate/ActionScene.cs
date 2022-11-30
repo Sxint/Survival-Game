@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Survive;
 
 namespace GameTemplate
 {
@@ -29,6 +30,9 @@ namespace GameTemplate
 
             platform = new Platform(game, spriteBatch, batTex, platformPos);
             this.components.Add(platform);
+
+            CollisionManager cm = new CollisionManager(g, bat, platform);
+            this.components.Add(cm);
 
         }
     }
