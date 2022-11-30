@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Survive;
 
 namespace GameTemplate
 {
@@ -16,7 +15,6 @@ namespace GameTemplate
         public Texture2D tex { get; set; }
         public Vector2 position;
         public Vector2 speed;
-
         bool hasJumped;
         public string test { get; set; }
 
@@ -47,6 +45,7 @@ namespace GameTemplate
             {
                 speed.X = 3f;
                 position.X += speed.X;
+
             }
 
             else if (Keyboard.GetState().IsKeyDown(Keys.Left))
