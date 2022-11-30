@@ -29,7 +29,7 @@ namespace GameTemplate
             this.tex = tex;
             position = newPosition;
             this.test = test;
-            //hasJumped = false;
+            hasJumped = false;
         }
 
 
@@ -60,7 +60,7 @@ namespace GameTemplate
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && hasJumped == false)
             {
-                position.Y -= 10f;
+                position.Y -= 1f;
                 speed.Y = -5f;
                 hasJumped = true;
             }
@@ -70,7 +70,7 @@ namespace GameTemplate
                 float i = 1;
                 speed.Y += 0.15f * i;
 
-                if (position.Y > 490 || position.Y + tex.Height >= 450)
+                if (position.Y + tex.Height >= 800)
                 {
                     hasJumped = false;
 
