@@ -11,6 +11,7 @@ namespace GameTemplate
 {
     public class Platform : DrawableGameComponent
     {
+        public static Platform Instance { get; private set; }
         public SpriteBatch spriteBatch { get; set; }
         public Texture2D tex { get; set; }
         public Vector2 position;
@@ -19,6 +20,7 @@ namespace GameTemplate
         public Platform(Game game, SpriteBatch spriteBatch,
             Texture2D tex, Vector2 Position) : base(game)
         {
+            Instance = this;
             this.spriteBatch = spriteBatch;
             this.tex = tex;
             position = Position;

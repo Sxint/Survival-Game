@@ -16,8 +16,33 @@ namespace GameTemplate
         public Vector2 position;
         public Vector2 speed;
         bool hasJumped;
+        bool isCollision = false;
         public string test { get; set; }
 
+        public bool checkIfColliding()
+        {
+            if (getBounds().Intersects(Platform.Instance.getBounds()))
+            {
+                return true;
+            }
+            return false;   
+
+        }
+
+        public bool checkNextPos(int hSpeed, int vSpeed)
+        {
+            Rectangle r = new Rectangle();
+            Vector2 newPos = new Vector2(position.X + hSpeed, position.Y + vSpeed);
+            r = new Rectangle((int)newPos.X, (int)newPos.Y, tex.Width, tex.Height);
+            if (r.Intersects(Platform.Instance.getBounds()))
+            {
+                return true;
+            }
+            return false;
+            
+
+
+        }
 
 
 
@@ -32,6 +57,7 @@ namespace GameTemplate
             hasJumped = false;
         }
 
+       
 
 
         public override void Update(GameTime gameTime)
@@ -39,37 +65,55 @@ namespace GameTemplate
             //very common mistake - never write the following line
             //KeyboardState x = new KeyboardState();
             //------------------------------------------
+            Vector2 tempSpeed;
             position.Y += speed.Y;
+           
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            if (checkIfColliding() == false)
             {
-                speed.X = 3f;
-                position.X += speed.X;
+
+
+
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Right))
+                {
+                    speed.X = 3f;
+                    if (!checkNextPos((int)speed.X,0))
+                    {
+                        position.X += speed.X;
+                    }
+                   // position.X += speed.X;
+
+                }
+
+                else if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                {
+                    speed.X = -3f;
+                    if (!checkNextPos((int)speed.X, 0))
+                    {
+                        position.X += speed.X;
+                    }
+                    //position.X -= speed.X;
+                }
+                else
+                {
+                    speed.X = 0f;
+                }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.Space) && hasJumped == false)
+                {
+                    position.Y -= 1f;
+                    speed.Y = -5f;
+                    hasJumped = true;
+                }
 
             }
-
-            else if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-                speed.X = 3f;
-                position.X -= speed.X;
-            }
-            else
-            {
-                speed.X = 0f;
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && hasJumped == false)
-            {
-                position.Y -= 1f;
-                speed.Y = -5f;
-                hasJumped = true;
-            }
-
+            
             if (hasJumped == true)
             {
                 float i = 1;
                 speed.Y += 0.15f * i;
-
+               
                 if (position.Y + tex.Height >= 800)
                 {
                     hasJumped = false;
