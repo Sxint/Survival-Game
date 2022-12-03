@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Survive;
 
 namespace GameTemplate
 {
@@ -14,22 +15,29 @@ namespace GameTemplate
         public SpriteBatch spriteBatch { get; set; }
         public Texture2D tex { get; set; }
         public Vector2 position;
-        public Vector2 speed;
-        bool hasJumped;
+        public int speed { get; set; }
+
+        public int jump { get; set; }
+
+        public bool hasjumped { get; set; }
         public string test { get; set; }
+
+        public float testJump;
 
 
 
 
         public Player(Game game, SpriteBatch spriteBatch,
-            Texture2D tex, Vector2 newPosition,
-            string test) : base(game)
+            Texture2D tex, int Speed, int Jump, Vector2 newPosition,
+            string test, bool hasJumped) : base(game)
         {
             this.spriteBatch = spriteBatch;
             this.tex = tex;
             position = newPosition;
+            this.speed = Speed;
+            this.jump = Jump;
             this.test = test;
-            hasJumped = false;
+            this.hasjumped = hasJumped;
         }
 
 
@@ -39,47 +47,46 @@ namespace GameTemplate
             //very common mistake - never write the following line
             //KeyboardState x = new KeyboardState();
             //------------------------------------------
-            position.Y += speed.Y;
+            position.Y += testJump;
 
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                speed.X = 3f;
-                position.X += speed.X;
+                //speed.X = 3f;
+                position.X += speed;
 
             }
 
             else if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                speed.X = 3f;
-                position.X -= speed.X;
+                //speed.X = 3f;
+                position.X -= speed;
             }
-            else
-            {
-                speed.X = 0f;
-            }
+            //else
+            //{
+            //    speed.X = 0f;
+            //}
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && hasJumped == false)
+            if (Keyboard.GetState().IsKeyDown(Keys.Space) && hasjumped == false)
             {
                 position.Y -= 1f;
-                speed.Y = -5f;
-                hasJumped = true;
+                testJump = -10f;
+                hasjumped = true;
             }
 
-            if (hasJumped == true)
+            if (hasjumped == true)
             {
                 float i = 1;
-                speed.Y += 0.15f * i;
+                testJump += 0.15f * i;
 
                 if (position.Y + tex.Height >= 800)
                 {
-                    hasJumped = false;
-
+                    hasjumped = false;
                 }
             }
 
-            else if (hasJumped == false)
+            else if (hasjumped == false)
             {
-                speed.Y = 0f;
+                testJump = 0f;
             }
 
             base.Update(gameTime);

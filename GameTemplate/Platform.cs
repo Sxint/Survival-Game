@@ -34,9 +34,17 @@ namespace GameTemplate
             base.Draw(gameTime);
         }
         //hitbox
-        public Rectangle getBounds()
+        public Rectangle getLeftBounds()
         {
-            return new Rectangle((int)position.X, (int)position.Y, tex.Width, tex.Height);
+            return new Rectangle((int)position.X + tex.Width, (int)position.Y + 20, 0, tex.Height);
+        }
+        public Rectangle getRightBounds()
+        {
+            return new Rectangle((int)position.X, (int)position.Y + 20, 0, tex.Height);
+        }
+        public Rectangle getTopBounds()
+        {
+            return new Rectangle((int)position.X + 5, (int)position.Y - 20, tex.Width - 50, tex.Height);
         }
     }
 }
