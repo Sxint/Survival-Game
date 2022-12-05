@@ -30,7 +30,7 @@ namespace GameTemplate
             int jump = 4;
 
             platform = new Platform(game, spriteBatch, batTex, platformPos);
-            bat = new Player(game, spriteBatch, batTex,  playerSpeed, jump, batPos, "test", false);
+            bat = new Player(game, spriteBatch, batTex,  playerSpeed, jump, batPos, "test", false, 1);
             Collisionmanager = new CollisionManager(g, bat, platform);
             this.components.Add(platform);
             this.components.Add(bat);

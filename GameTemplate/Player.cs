@@ -16,20 +16,19 @@ namespace GameTemplate
         public Texture2D tex { get; set; }
         public Vector2 position;
         public int speed { get; set; }
-
         public int jump { get; set; }
-
         public bool hasjumped { get; set; }
         public string test { get; set; }
+        public float gravity { get; set; }
 
-        public float testJump;
-
+        public bool isCollideLeft;
+        public bool isCollideRight;
 
 
 
         public Player(Game game, SpriteBatch spriteBatch,
             Texture2D tex, int Speed, int Jump, Vector2 newPosition,
-            string test, bool hasJumped) : base(game)
+            string test, bool hasJumped, float Gravity) : base(game)
         {
             this.spriteBatch = spriteBatch;
             this.tex = tex;
@@ -38,6 +37,7 @@ namespace GameTemplate
             this.jump = Jump;
             this.test = test;
             this.hasjumped = hasJumped;
+            this.gravity = Gravity;
         }
 
 
@@ -47,19 +47,25 @@ namespace GameTemplate
             //very common mistake - never write the following line
             //KeyboardState x = new KeyboardState();
             //------------------------------------------
-            position.Y += testJump;
+            position.Y += gravity;
 
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                //speed.X = 3f;
-                position.X += speed;
-
+                if(!isCollideLeft)
+                {
+                    position.X += speed;
+                }    
+                isCollideLeft = false;
+                //position.X += speed;
             }
 
             else if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                //speed.X = 3f;
-                position.X -= speed;
+                if (!isCollideRight)
+                {
+                    position.X -= speed;
+                }
+                isCollideRight = false;
             }
             //else
             //{
@@ -68,15 +74,16 @@ namespace GameTemplate
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space) && hasjumped == false)
             {
-                position.Y -= 1f;
-                testJump = -10f;
+                position.Y -= jump;
+                gravity = -10f;
                 hasjumped = true;
             }
 
             if (hasjumped == true)
             {
-                float i = 1;
-                testJump += 0.15f * i;
+
+                float i = jump;
+                gravity += 0.15f * i;
 
                 if (position.Y + tex.Height >= 800)
                 {
@@ -86,7 +93,11 @@ namespace GameTemplate
 
             else if (hasjumped == false)
             {
-                testJump = 0f;
+                gravity = 0f;
+                if(position.Y < Shared.stage.Y)
+                {
+                    position.Y = Shared.stage.Y - tex.Height;
+                }
             }
 
             base.Update(gameTime);
