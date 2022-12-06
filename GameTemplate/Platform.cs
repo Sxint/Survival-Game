@@ -31,8 +31,8 @@ namespace GameTemplate
             spriteBatch.Begin();
             spriteBatch.Draw(tex, position, Color.White);
             spriteBatch.Draw(tex, getTopBounds(), Color.Gray);
-            spriteBatch.Draw(tex, getRightBounds(), Color.Gray);
-            spriteBatch.Draw(tex, getLeftBounds(), Color.Gray);
+            spriteBatch.Draw(tex, getRightBounds(), Color.Red);
+            spriteBatch.Draw(tex, getLeftBounds(), Color.Blue);
 
             spriteBatch.DrawString(regular, position.Y.ToString(), new Vector2(position.X, position.Y), Color.White);
             spriteBatch.End();
@@ -51,5 +51,6 @@ namespace GameTemplate
         {
             return new Rectangle((int)position.X, (int)position.Y, tex.Width, tex.Height - (tex.Height - 5));
         }
+
     }
 }

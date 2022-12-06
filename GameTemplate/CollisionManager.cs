@@ -31,25 +31,34 @@ namespace Survive
 
                 player.position = new Vector2(platformRectLeft.Right, player.position.Y);
                 player.isCollideLeft = true;
-            }
-            
 
+            }
+            else
+            {
+                player.isCollideLeft = false;
+            }
+            //right side of platform
             if (playerRect.Intersects(platformRectRight))
             {
-                if (!player.hasjumped)
-                {
-                    player.position = new Vector2(platformRectRight.Left - player.tex.Width, player.position.Y);
-                }
-                //player.position = new Vector2(platformRectRight.Left - player.tex.Width, player.position.Y);
+                player.position = new Vector2(platformRectRight.Left - player.tex.Width, player.position.Y);
                 player.isCollideRight = true;
+            }
+            else
+            {
+                player.isCollideRight = false;
             }
 
 
             //TODO: Fix jump function
             if (playerRect.Intersects(platformRectTop))
             {
-                player.hasjumped = false;
-                player.gravity = 0f;
+                if(player.position.Y != platformRectTop.Top)
+                {
+                    player.gravity = 0f;
+                    player.isCollideUp = true;
+                    player.position.Y = platformRectTop.Top - (player.tex.Height + 1);
+                    player.hasjumped = false;
+                }
             }
 
             base.Update(gameTime);

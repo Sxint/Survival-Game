@@ -27,10 +27,10 @@ namespace GameTemplate
             Vector2 batPos = new Vector2(Shared.stage.X / 2 - batTex.Width / 2,Shared.stage.Y - batTex.Height);
             Vector2 platformPos = new Vector2(200, Shared.stage.Y - batTex.Height);
             int playerSpeed = 4;
-            int jump = 4;
+            int jump = 3;
 
             platform = new Platform(game, spriteBatch, batTex, platformPos);
-            bat = new Player(game, spriteBatch, batTex,  playerSpeed, jump, batPos, "test", false, 1);
+            bat = new Player(game, spriteBatch, batTex,  playerSpeed, jump, batPos, "test", false);
             Collisionmanager = new CollisionManager(g, bat, platform);
             this.components.Add(platform);
             this.components.Add(bat);
