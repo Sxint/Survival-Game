@@ -39,6 +39,18 @@
 /processorParam:TextureFormat=Color
 /build:images/Help2.png
 
+#begin images/Marine.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/Marine.png
+
 #begin images/player.png
 /importer:TextureImporter
 /processor:TextureProcessor
