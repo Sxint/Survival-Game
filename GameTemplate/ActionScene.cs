@@ -20,7 +20,7 @@ namespace GameTemplate
         private Platform platform, platform2;
         public CollisionManager Collisionmanager;
         private Enemy enemy;
-        public CollisionManager enemyCollisionManager;
+        public EnemyCollisionManager enemyCollisionManager;
         public ActionScene(Game game) : base(game)
         {
             g = (Game1)game;
@@ -39,7 +39,7 @@ namespace GameTemplate
             bat = new Player(game, spriteBatch, batTex,  playerSpeed, jump, batPos, "test");
             enemy = new Enemy(game, spriteBatch, batTex, playerSpeed, jump, batPos2, "test", bat);
             Collisionmanager = new CollisionManager(g, bat, platform);
-            enemyCollisionManager = new CollisionManager(g, enemy, platform);
+            enemyCollisionManager = new EnemyCollisionManager(g, enemy, platform);
             this.components.Add(platform);
             this.components.Add(platform2);
 

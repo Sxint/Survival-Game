@@ -50,16 +50,54 @@ namespace GameTemplate
         {
             if (position.X > player.position.X && !isCollideLeft)
             {
-                position.X -= 1;
+                position.X -= 5;
+                
+                
             }
-            else if (position.X < player.position.X)
+            else
+            {
+                isCollideLeft = false;
+               
+            }
+
+            if (position.X < player.position.X)
             {
                 position.X += 1;
+
+            }
+
+          
+
+            if (hasjumped == true)
+            {
+
+                float i = jump;
+                gravity += 0.15f * i;
+
+                if (position.Y + tex.Height >= 800)
+                {
+                    hasjumped = false;
+                }
+            }
+
+            //NOTE: there are some weird edge cases with this but it works
+            else if (hasjumped == false)
+            {
+                if (position.Y < Shared.stage.Y && !isCollideUp)
+                {
+                    position.Y = Shared.stage.Y - tex.Height;
+                }
+                else
+                {
+                    gravity = 0f;
+                }
             }
 
 
             base.Update(gameTime);
         }
+
+
         public override void Draw(GameTime gameTime)
         {
             SpriteFont regular = Game.Content.Load<SpriteFont>("fonts/regularFont");
@@ -68,21 +106,30 @@ namespace GameTemplate
 
             //spriteBatch.Draw(tex, position, null, Color.White, playerRotation, playerOrigin, 1, SpriteEffects.None, 1);
             spriteBatch.DrawString(regular, position.Y.ToString(), new Vector2(position.X, position.Y), Color.White);
-            spriteBatch.DrawString(regular, "isCollideUp: " + isCollideUp.ToString(), new Vector2(0, 0), Color.White);
-            spriteBatch.DrawString(regular, "isCollideLeft: " + isCollideLeft.ToString(), new Vector2(0, 20), Color.White);
-            spriteBatch.DrawString(regular, "isCollideRight: " + isCollideRight.ToString(), new Vector2(0, 40), Color.White);
-            spriteBatch.DrawString(regular, "HasJump: " + hasjumped.ToString(), new Vector2(0, 60), Color.White);
-            spriteBatch.DrawString(regular, "Player X Position: " + position.X.ToString(), new Vector2(0, 80), Color.White);
-            spriteBatch.DrawString(regular, "Player Y Position: " + position.Y.ToString(), new Vector2(0, 100), Color.White);
+            spriteBatch.DrawString(regular, "isCollideUp: " + isCollideUp.ToString(), new Vector2(0, 120), Color.White);
+            spriteBatch.DrawString(regular, "isCollideLeft: " + isCollideLeft.ToString(), new Vector2(0,140), Color.White);
+            spriteBatch.DrawString(regular, "isCollideRight: " + isCollideRight.ToString(), new Vector2(0, 160), Color.White);
+            spriteBatch.DrawString(regular, "HasJump: " + hasjumped.ToString(), new Vector2(0, 180), Color.White);
+
 
 
             spriteBatch.End();
             base.Draw(gameTime);
         }
 
+        public void Jump()
+        {
+            
+            position.Y -= jump;
+            gravity = -10f;
+            hasjumped = true;
+            
+        }
+      
 
-        //hitbox
-        public Rectangle getBounds()
+
+    //hitbox
+    public Rectangle getBounds()
         {
             return new Rectangle((int)position.X, (int)position.Y, tex.Width, tex.Height);
         }
