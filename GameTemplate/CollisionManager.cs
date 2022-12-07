@@ -1,5 +1,6 @@
 ﻿using GameTemplate;
 using Microsoft.Xna.Framework;
+using SharpDX.MediaFoundation;
 
 namespace Survive
 {
@@ -7,6 +8,10 @@ namespace Survive
     {
         private Player player;
         private Platform platform;
+        private Enemy enemy;
+        private Rectangle playerRect;
+        private Rectangle enemyRect;
+
 
 
         public CollisionManager(Game game, Player player, Platform platform) : base(game)
@@ -15,9 +20,24 @@ namespace Survive
             this.platform = platform;
         }
 
+        public CollisionManager(Game game, Enemy Enemy, Platform platform) : base(game)
+        {
+            this.platform = platform;
+            this.enemy = Enemy;
+        }
+
         public override void Update(GameTime gameTime)
-        { 
-            Rectangle playerRect = player.getBounds();
+        {
+            if (player != null)
+            {
+                Rectangle playerRect = player.getBounds();
+            }
+
+
+            if (enemy != null)
+            {
+                Rectangle enemyRect = enemy.getBounds();
+            }
 
             Rectangle platformRectLeft = platform.getLeftBounds();
 
@@ -25,11 +45,27 @@ namespace Survive
 
             Rectangle platformRectTop = platform.getTopBounds();
 
-            if (playerRect.Intersects(platformRectLeft))
+            if (!playerRect.IsEmpty)
             {
 
-                //player.position = new Vector2(platformRectLeft.Right, player.position.Y);
-                player.isCollideLeft = true;
+
+                if (playerRect.Intersects(platformRectLeft))
+                {
+
+                    //player.position = new Vector2(platformRectLeft.Right, player.position.Y);
+                    player.isCollideLeft = true;
+                }
+
+            }
+
+            if (!enemyRect.IsEmpty) 
+            { 
+                if (enemyRect.Intersects(platformRectLeft))
+                {
+
+                    //player.position = new Vector2(platformRectLeft.Right, player.position.Y);
+                    enemy.isCollideLeft = true;
+                }
             }
 
             ////right side of platform
@@ -43,7 +79,7 @@ namespace Survive
             if (playerRect.Intersects(platformRectTop) && player.hasjumped && player.isCollideLeft == false && player.isCollideRight == false)
             {
 
-                if(player.position.Y != platformRectTop.Top)
+                if (player.position.Y != platformRectTop.Top)
                 {
                     player.gravity = 0f;
                     player.isCollideUp = true;
@@ -52,37 +88,42 @@ namespace Survive
                 }
             }
 
-            if (player.isCollideLeft)
+            if (player != null)
             {
-                player.position.X = platformRectLeft.Right;
-                if(player.position.Y - player.tex.Height > platformRectLeft.Height)
+
+            
+                if (player.isCollideLeft)
                 {
-                    player.isCollideLeft = false;
+                    player.position.X = platformRectLeft.Right;
+                    if (player.position.Y - player.tex.Height > platformRectLeft.Height)
+                    {
+                        player.isCollideLeft = false;
+                    }
                 }
-            }
 
-            if (player.isCollideRight)
-            {
-                player.position.X = platformRectRight.Left - player.tex.Width;
-                if (player.position.Y - player.tex.Height > platformRectLeft.Height)
+                if (player.isCollideRight)
                 {
-                    player.isCollideRight = false;
+                    player.position.X = platformRectRight.Left - player.tex.Width;
+                    if (player.position.Y - player.tex.Height > platformRectLeft.Height)
+                    {
+                        player.isCollideRight = false;
+                    }
                 }
-            }
 
-            if (player.isCollideUp)
-            {
-                if (player.position.X > platformRectTop.Right)
+                if (player.isCollideUp)
                 {
-                    player.hasjumped = true;
+                    if (player.position.X > platformRectTop.Right)
+                    {
+                        player.hasjumped = true;
 
-                    player.isCollideUp = false;
-                }
-                if (player.position.X + player.tex.Width < platformRectTop.X)
-                {
-                    player.hasjumped = true;
+                        player.isCollideUp = false;
+                    }
+                    if (player.position.X + player.tex.Width < platformRectTop.X)
+                    {
+                        player.hasjumped = true;
 
-                    player.isCollideUp = false;
+                        player.isCollideUp = false;
+                    }
                 }
             }
 
