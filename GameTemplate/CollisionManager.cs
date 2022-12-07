@@ -1,5 +1,6 @@
 ﻿using GameTemplate;
 using Microsoft.Xna.Framework;
+using SharpDX.MediaFoundation;
 
 namespace Survive
 {
@@ -7,6 +8,10 @@ namespace Survive
     {
         private Player player;
         private Platform platform;
+        private Enemy enemy;
+        private Rectangle playerRect;
+        private Rectangle enemyRect;
+
 
 
         public CollisionManager(Game game, Player player, Platform platform) : base(game)
@@ -15,9 +20,16 @@ namespace Survive
             this.platform = platform;
         }
 
+
+
         public override void Update(GameTime gameTime)
-        { 
+        {
+        
             Rectangle playerRect = player.getBounds();
+            
+
+
+          
 
             Rectangle platformRectLeft = platform.getLeftBounds();
 
@@ -25,12 +37,19 @@ namespace Survive
 
             Rectangle platformRectTop = platform.getTopBounds();
 
+        
+
+
             if (playerRect.Intersects(platformRectLeft))
             {
 
                 //player.position = new Vector2(platformRectLeft.Right, player.position.Y);
                 player.isCollideLeft = true;
             }
+
+            
+
+           
 
             ////right side of platform
             if (playerRect.Intersects(platformRectRight))
@@ -43,7 +62,7 @@ namespace Survive
             if (playerRect.Intersects(platformRectTop) && player.hasjumped && player.isCollideLeft == false && player.isCollideRight == false)
             {
 
-                if(player.position.Y != platformRectTop.Top)
+                if (player.position.Y != platformRectTop.Top)
                 {
                     player.gravity = 0f;
                     player.isCollideUp = true;
@@ -52,10 +71,12 @@ namespace Survive
                 }
             }
 
+          
+            
             if (player.isCollideLeft)
             {
                 player.position.X = platformRectLeft.Right;
-                if(player.position.Y - player.tex.Height > platformRectLeft.Height)
+                if (player.position.Y - player.tex.Height > platformRectLeft.Height)
                 {
                     player.isCollideLeft = false;
                 }
@@ -85,6 +106,7 @@ namespace Survive
                     player.isCollideUp = false;
                 }
             }
+            
 
             base.Update(gameTime);
         }
