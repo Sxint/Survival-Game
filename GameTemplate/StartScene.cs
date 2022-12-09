@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace GameTemplate
 {
@@ -29,6 +31,11 @@ namespace GameTemplate
             SpriteFont hilight = game.Content.Load<SpriteFont>("fonts/hilightFont");
             menu = new MenuComponent(game, spriteBatch, regular, hilight, menuItems);
             this.components.Add(menu);
+
+            //Added music
+            Song backgroundMusic = g.Content.Load<Song>("songs/InGameMusic");
+            MediaPlayer.IsRepeating = true;
+            MediaPlayer.Play(backgroundMusic);
         }
     }
 }
