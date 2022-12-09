@@ -10,7 +10,7 @@ namespace Survive
 
         private Platform platform;
         private Enemy enemy;
-
+        
 
         public EnemyCollisionManager(Game game, Enemy Enemy, Platform platform) : base(game)
         {
