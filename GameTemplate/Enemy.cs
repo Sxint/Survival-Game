@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Survive;
 
 namespace GameTemplate
 {
@@ -14,6 +15,8 @@ namespace GameTemplate
         public int jump { get; set; }
         public bool hasjumped { get; set; }
         public string test { get; set; }
+
+        public string platform;
         public float gravity { get; set; }
 
         public bool isCollideLeft;
@@ -63,6 +66,7 @@ namespace GameTemplate
             //playerRotation = (float)Math.Atan2(distance.Y, distance.X);
 
             position.Y += gravity;
+            platform = "";
 
             if (player.position.X < position.X)
             {
@@ -127,6 +131,8 @@ namespace GameTemplate
             spriteBatch.DrawString(regular, "isCollideLeft: " + isCollideLeft.ToString(), new Vector2(0,140), Color.White);
             spriteBatch.DrawString(regular, "isCollideRight: " + isCollideRight.ToString(), new Vector2(0, 160), Color.White);
             spriteBatch.DrawString(regular, "HasJump: " + hasjumped.ToString(), new Vector2(0, 180), Color.White);
+            spriteBatch.DrawString(regular, "Platform: " + platform.ToString(), new Vector2(0, 200), Color.White);
+
 
 
 

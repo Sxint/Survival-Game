@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,12 +23,12 @@ namespace GameTemplate
         private Enemy enemy;
         private List<Platform> platforms = new List<Platform>();
         public EnemyCollisionManager enemyCollisionManager;
+
         public ActionScene(Game game) : base(game)
         {
             g = (Game1)game;
             this.spriteBatch = g._spriteBatch;
             platforms = new List<Platform>();
-
             Texture2D batTex = g.Content.Load<Texture2D>("images/player");
             Texture2D playerTex = g.Content.Load<Texture2D>("images/marine");
             Vector2 batPos = new Vector2(Shared.stage.X / 2 - batTex.Width / 2,Shared.stage.Y - batTex.Height);
