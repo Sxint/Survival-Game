@@ -1,29 +1,29 @@
 ﻿using GameTemplate;
 using Microsoft.Xna.Framework;
 using SharpDX.MediaFoundation;
+using System;
 
 namespace Survive
 {
     public class EnemyCollisionManager : GameComponent
     {
-      
+
         private Platform platform;
         private Enemy enemy;
 
 
         public EnemyCollisionManager(Game game, Enemy Enemy, Platform platform) : base(game)
         {
-            this.platform = platform;
             this.enemy = Enemy;
+            this.platform = platform;
         }
+
+
 
         public override void Update(GameTime gameTime)
         {
-            Rectangle playerRect = enemy.getBounds();
 
-
-
-
+            Rectangle enemyRect = enemy.getBounds();
 
             Rectangle platformRectLeft = platform.getLeftBounds();
 
@@ -34,26 +34,26 @@ namespace Survive
 
 
 
-            if (playerRect.Intersects(platformRectLeft))
+            if (enemyRect.Intersects(platformRectLeft))
             {
-
-                //player.position = new Vector2(platformRectLeft.Right, player.position.Y);
                 enemy.isCollideLeft = true;
+
+                enemy.position.Y -= enemy.jump;
+                enemy.gravity = -10f;
+                enemy.hasjumped = true;
+
             }
 
 
-
-
-
             ////right side of platform
-            if (playerRect.Intersects(platformRectRight))
+            if (enemyRect.Intersects(platformRectRight))
             {
                 //player.position = new Vector2(platformRectRight.Left - player.tex.Width, player.position.Y);
                 enemy.isCollideRight = true;
             }
 
             //TODO: Fix jump function
-            if (playerRect.Intersects(platformRectTop) && enemy.hasjumped && enemy.isCollideLeft == false && enemy.isCollideRight == false)
+            if (enemyRect.Intersects(platformRectTop) && enemy.hasjumped && enemy.isCollideLeft == false && enemy.isCollideRight == false)
             {
 
                 if (enemy.position.Y != platformRectTop.Top)
@@ -63,19 +63,19 @@ namespace Survive
                     enemy.position.Y = platformRectTop.Top - (enemy.tex.Height);
                     enemy.hasjumped = false;
                 }
+                enemy.hasjumped = false;
+
             }
 
 
 
-            if (enemy.isCollideLeft)
+            if (enemy.isCollideLeft && enemy.hasjumped != true)
             {
                 enemy.position.X = platformRectLeft.Right;
                 if (enemy.position.Y - enemy.tex.Height > platformRectLeft.Height)
                 {
                     enemy.isCollideLeft = false;
-                    enemy.Jump();
                 }
-                
             }
 
             if (enemy.isCollideRight)
@@ -89,13 +89,13 @@ namespace Survive
 
             if (enemy.isCollideUp)
             {
-                if (enemy.position.X > platformRectTop.Right)
+                if (enemy.position.X > platformRectTop.Right && enemy.hasjumped != true)
                 {
                     enemy.hasjumped = true;
 
                     enemy.isCollideUp = false;
                 }
-                if (enemy.position.X + enemy.tex.Width < platformRectTop.X)
+                if (enemy.position.X + enemy.tex.Width < platformRectTop.X && enemy.hasjumped != true)
                 {
                     enemy.hasjumped = true;
 

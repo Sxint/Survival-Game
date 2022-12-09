@@ -27,10 +27,6 @@ namespace Survive
         
             Rectangle playerRect = player.getBounds();
             
-
-
-          
-
             Rectangle platformRectLeft = platform.getLeftBounds();
 
             Rectangle platformRectRight = platform.getRightBounds();
