@@ -28,11 +28,11 @@ namespace Survive
             {
                 Rectangle enemyRect = enemy.getBounds();
 
-                Rectangle platformRectLeft = platform.getLeftBounds();
+                Rectangle platformRectLeft = item.getLeftBounds();
 
-                Rectangle platformRectRight = platform.getRightBounds();
+                Rectangle platformRectRight = item.getRightBounds();
 
-                Rectangle platformRectTop = platform.getTopBounds();
+                Rectangle platformRectTop = item.getTopBounds();
 
 
                 //if the enemy hiuts the left side of the platform
