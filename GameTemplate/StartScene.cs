@@ -32,9 +32,9 @@ namespace GameTemplate
             menu = new MenuComponent(game, spriteBatch, regular, hilight, menuItems);
             this.components.Add(menu);
 
-            
 
-            Song backgroundMusic = g.Content.Load<Song>("sounds/Undertale OST_ 023 - Shop");
+            //Added music
+            Song backgroundMusic = g.Content.Load<Song>("songs/InGameMusic");
             MediaPlayer.IsRepeating = true;
             MediaPlayer.Play(backgroundMusic);
         }

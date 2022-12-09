@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,16 +24,15 @@ namespace GameTemplate
         private Enemy enemy;
         private List<Platform> platforms = new List<Platform>();
         public EnemyCollisionManager enemyCollisionManager;
+
         public ActionScene(Game game) : base(game)
         {
             g = (Game1)game;
             this.spriteBatch = g._spriteBatch;
             platforms = new List<Platform>();
-
-           
             Texture2D batTex = g.Content.Load<Texture2D>("images/player");
             Texture2D playerTex = g.Content.Load<Texture2D>("images/marine");
-            SoundEffect jumpSound = g.Content.Load<SoundEffect>("sounds/jump");
+            SoundEffect jumpSound = g.Content.Load<SoundEffect>("songs/jump");
             Vector2 batPos = new Vector2(Shared.stage.X / 2 - batTex.Width / 2,Shared.stage.Y - batTex.Height);
             Vector2 batPos2 = new Vector2((Shared.stage.X / 2 - batTex.Width / 2) + 20 , Shared.stage.Y - batTex.Height);
             Vector2 platformPos = new Vector2(200, Shared.stage.Y - batTex.Height);

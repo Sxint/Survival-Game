@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using SharpDX.Direct3D9;
 
 namespace GameTemplate
 {
@@ -16,6 +17,8 @@ namespace GameTemplate
         public Texture2D tex { get; set; }
 
         public Vector2 position;
+        internal object platformRectLeft;
+
         public string test { get; set; }
 
         public Platform(Game game, SpriteBatch spriteBatch,
@@ -56,5 +59,9 @@ namespace GameTemplate
             return new Rectangle((int)position.X, (int)position.Y, tex.Width, tex.Height - (tex.Height - 5));
         }
 
+        public Rectangle getBounds()
+        {
+            return new Rectangle((int)position.X, (int)position.Y, tex.Width, tex.Height);
+        }
     }
 }

@@ -2,18 +2,14 @@
 using Microsoft.Xna.Framework;
 using SharpDX.MediaFoundation;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Survive
 {
     public class CollisionManager : GameComponent
     {
         private Player player;
-        private Platform platform;
-        private Enemy enemy;
-        private Rectangle playerRect;
-        private Rectangle enemyRect;
         private List<Platform> platforms;
-
 
 
         public CollisionManager(Game game, Player player, List<Platform> platforms) : base(game)
@@ -26,9 +22,7 @@ namespace Survive
 
         public override void Update(GameTime gameTime)
         {
-        
-
-        
+   
             foreach(Platform item in platforms) 
             { 
                 
@@ -40,14 +34,13 @@ namespace Survive
 
                 Rectangle platformRectTop = item.getTopBounds();
 
+
                 if (playerRect.Intersects(platformRectLeft))
                 {
-
-                    //player.position = new Vector2(platformRectLeft.Right, player.position.Y);
                     player.isCollideLeft = true;
                 }
 
-                    ////right side of platform
+                    //right side of platform
                 if (playerRect.Intersects(platformRectRight))
                 {
                     //player.position = new Vector2(platformRectRight.Left - player.tex.Width, player.position.Y);

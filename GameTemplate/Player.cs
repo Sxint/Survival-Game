@@ -26,12 +26,6 @@ namespace GameTemplate
 
         public double time = 0f;
 
-        private float playerRotation;
-
-        private Vector2 playerPosition;
-
-        private Vector2 playerOrigin;
-
         public int spriteSizeX = 3;
 
         public int spriteSizeY = 3;
@@ -48,15 +42,23 @@ namespace GameTemplate
 
         public int frameTime = 0;
 
+        Texture2D rect;
+
+        Color[] data = new Color[80 * 30];
+
+        Vector2 coor;
+
         private SoundEffect jumpSound;
-        
-       
+
+
+
 
 
         public Player(Game game, SpriteBatch spriteBatch,
             Texture2D tex, int Speed, int Jump, Vector2 newPosition,
             string test, SoundEffect jumpSound) : base(game)
         {
+            this.rect = new Texture2D(game.GraphicsDevice, 80, 30);
             this.spriteBatch = spriteBatch;
             this.tex = tex;
             position = newPosition;
@@ -66,13 +68,12 @@ namespace GameTemplate
             this.jumpSound = jumpSound;
             playerWidth = tex.Width / 3;
             playerHeight = 34;
-           // playerHeight = tex.Height / 3;
+            for (int i = 0; i < data.Length; i++) data[i] = Color.Chocolate;
+            rect.SetData(data);
 
-            //playerOrigin = new Vector2(tex.Width / 2, tex.Height / 2);
-            //playerPosition = new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
         }
 
-       
+
 
 
         public override void Update(GameTime gameTime)
@@ -99,7 +100,7 @@ namespace GameTemplate
                 {
                     position.X += speed;
                 }    
-                isCollideLeft = false;
+                //isCollideLeft = false;
                 //position.X += speed;
             }
 
@@ -122,7 +123,6 @@ namespace GameTemplate
 
             if (hasjumped == true)
             {
-
                 float i = jump;
                 gravity += 0.15f * i;
 
@@ -173,11 +173,11 @@ namespace GameTemplate
         {
             SpriteFont regular = Game.Content.Load<SpriteFont>("fonts/regularFont");
             spriteBatch.Begin();
-           // spriteBatch.Draw(tex, position, null, Color.White);
+            //spriteBatch.Draw(tex, position, null, Color.White);
             spriteBatch.Draw(tex, position, new Rectangle((tex.Width / spriteSizeX * frameX) + 9 ,(tex.Height / spriteSizeY * frameY) + 9 ,playerWidth, playerHeight), Color.White);
 
             //healthbar
-            //spriteBatch.Draw(tex, new Vector2(position.X, position.Y - 20),new Rectangle((int)position.X, (int)position.Y + 10, tex.Width, 10), Color.Green);
+            spriteBatch.Draw(rect, new Vector2(position.X, position.Y), Color.White);
 
 
             //spriteBatch.Draw(tex, position, null, Color.White, playerRotation, playerOrigin, 1, SpriteEffects.None, 1);
@@ -188,7 +188,6 @@ namespace GameTemplate
             spriteBatch.DrawString(regular, "HasJump: " + hasjumped.ToString(), new Vector2(0, 60), Color.White);
             spriteBatch.DrawString(regular, "Player X Position: " + position.X.ToString(), new Vector2(0, 80), Color.White);
             spriteBatch.DrawString(regular, "Player Y Position: " + position.Y.ToString(), new Vector2(0, 100), Color.White);
-
 
             spriteBatch.End();
             base.Draw(gameTime);
