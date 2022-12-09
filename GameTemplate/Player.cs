@@ -125,6 +125,10 @@ namespace GameTemplate
             spriteBatch.Begin();
             spriteBatch.Draw(tex, position, null, Color.White);
 
+            //healthbar
+            //spriteBatch.Draw(tex, new Vector2(position.X, position.Y - 20),new Rectangle((int)position.X, (int)position.Y + 10, tex.Width, 10), Color.Green);
+
+
             //spriteBatch.Draw(tex, position, null, Color.White, playerRotation, playerOrigin, 1, SpriteEffects.None, 1);
             spriteBatch.DrawString(regular, position.Y.ToString(), new Vector2(position.X, position.Y), Color.White);
             spriteBatch.DrawString(regular, "isCollideUp: " + isCollideUp.ToString(), new Vector2(0, 0), Color.White);
