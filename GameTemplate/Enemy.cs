@@ -85,13 +85,6 @@ namespace GameTemplate
                 //position.X += speed;
             }
 
-            //if (Keyboard.GetState().IsKeyDown(Keys.Space) && hasjumped == false)
-            //{
-            //    position.Y -= jump;
-            //    gravity = -10f;
-            //    hasjumped = true;
-            //}
-
             if (hasjumped == true)
             {
 
