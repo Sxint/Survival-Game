@@ -48,25 +48,49 @@ namespace GameTemplate
 
         public override void Update(GameTime gameTime)
         {
-            if (position.X > player.position.X && !isCollideLeft)
+            time += gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            //very common mistake - never write the following line
+            //KeyboardState x = new KeyboardState();
+            //------------------------------------------
+
+            //MouseState mouse = Mouse.GetState();
+
+            //Make the player face the mouse
+
+            //var distance = new Vector2(mouse.X - playerPosition.X, mouse.Y - playerPosition.Y);
+
+            //playerRotation = (float)Math.Atan2(distance.Y, distance.X);
+
+            position.Y += gravity;
+
+            if (player.position.X < position.X)
             {
-                position.X -= 5;
-                
-                
-            }
-            else
-            {
+                if (!isCollideLeft)
+                {
+                    position.X -= 3;
+                }
                 isCollideLeft = false;
-               
+                //position.X += speed;
             }
 
-            if (position.X < player.position.X)
+            if (player.position.X > position.X)
             {
-                position.X += 1;
+                if (!isCollideLeft)
+                {
+                    position.X += 3;
+                }
 
+                isCollideRight = false;
+                //position.X += speed;
             }
 
-          
+            //if (Keyboard.GetState().IsKeyDown(Keys.Space) && hasjumped == false)
+            //{
+            //    position.Y -= jump;
+            //    gravity = -10f;
+            //    hasjumped = true;
+            //}
 
             if (hasjumped == true)
             {
@@ -116,16 +140,6 @@ namespace GameTemplate
             spriteBatch.End();
             base.Draw(gameTime);
         }
-
-        public void Jump()
-        {
-            
-            position.Y -= jump;
-            gravity = -10f;
-            hasjumped = true;
-            
-        }
-      
 
 
     //hitbox

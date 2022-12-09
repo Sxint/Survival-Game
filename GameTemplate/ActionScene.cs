@@ -33,11 +33,12 @@ namespace GameTemplate
 
             int playerSpeed = 4;
             int jump = 3;
+            int jump2 = 3;
 
             platform2 = new Platform(game, spriteBatch, batTex, platformPos2);
             platform = new Platform(game, spriteBatch, batTex, platformPos);
             bat = new Player(game, spriteBatch, batTex,  playerSpeed, jump, batPos, "test");
-            enemy = new Enemy(game, spriteBatch, batTex, playerSpeed, jump, batPos2, "test", bat);
+            enemy = new Enemy(game, spriteBatch, batTex, playerSpeed, jump2, batPos2, "test", bat);
             Collisionmanager = new CollisionManager(g, bat, platform);
             enemyCollisionManager = new EnemyCollisionManager(g, enemy, platform);
             this.components.Add(platform);
