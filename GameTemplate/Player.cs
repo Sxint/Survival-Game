@@ -44,13 +44,9 @@ namespace GameTemplate
 
         Texture2D rect;
 
-        Color[] data = new Color[80 * 30];
 
-        Vector2 coor;
 
         private SoundEffect jumpSound;
-
-
 
 
 
@@ -58,7 +54,6 @@ namespace GameTemplate
             Texture2D tex, int Speed, int Jump, Vector2 newPosition,
             string test, SoundEffect jumpSound) : base(game)
         {
-            this.rect = new Texture2D(game.GraphicsDevice, 80, 30);
             this.spriteBatch = spriteBatch;
             this.tex = tex;
             position = newPosition;
@@ -68,6 +63,9 @@ namespace GameTemplate
             this.jumpSound = jumpSound;
             playerWidth = tex.Width / 3;
             playerHeight = 34;
+            this.rect = new Texture2D(game.GraphicsDevice, playerWidth, 5);
+            Color[] data = new Color[playerWidth * 5];
+
             for (int i = 0; i < data.Length; i++) data[i] = Color.Chocolate;
             rect.SetData(data);
 
@@ -177,7 +175,7 @@ namespace GameTemplate
             spriteBatch.Draw(tex, position, new Rectangle((tex.Width / spriteSizeX * frameX) + 9 ,(tex.Height / spriteSizeY * frameY) + 9 ,playerWidth, playerHeight), Color.White);
 
             //healthbar
-            spriteBatch.Draw(rect, new Vector2(position.X, position.Y), Color.White);
+            spriteBatch.Draw(rect, new Vector2(position.X - 50, position.Y - 30), Color.White);
 
 
             //spriteBatch.Draw(tex, position, null, Color.White, playerRotation, playerOrigin, 1, SpriteEffects.None, 1);
