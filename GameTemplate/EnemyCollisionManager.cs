@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using SharpDX.MediaFoundation;
 using System;
+using System.Collections.Generic;
 
 namespace Survive
 {

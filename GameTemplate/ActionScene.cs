@@ -49,7 +49,7 @@ namespace GameTemplate
             bat = new Player(game, spriteBatch, playerTex,  playerSpeed, jump, batPos, "test");
             enemy = new Enemy(game, spriteBatch, batTex, playerSpeed, jump2, batPos2, "test", bat);
             Collisionmanager = new CollisionManager(g, bat, platforms);
-            enemyCollisionManager = new EnemyCollisionManager(g, enemy, platform);
+            enemyCollisionManager = new EnemyCollisionManager(g, enemy, platforms);
             this.components.Add(platform);
             this.components.Add(platform2);
 
