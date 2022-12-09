@@ -30,6 +30,26 @@ namespace GameTemplate
 
         private Vector2 playerOrigin;
 
+        public int spriteSizeX = 3;
+
+        public int spriteSizeY = 3;
+
+        public int playerWidth;
+
+        public int playerHeight;
+
+        public int frameX = 0;
+
+        public int frameY = 0;
+
+        public int framePause = 6;
+
+        public int frameTime = 0;
+
+
+        
+
+
 
         public Player(Game game, SpriteBatch spriteBatch,
             Texture2D tex, int Speed, int Jump, Vector2 newPosition,
@@ -41,6 +61,10 @@ namespace GameTemplate
             this.speed = Speed;
             this.jump = Jump;
             this.test = test;
+            playerWidth = tex.Width / 3;
+            playerHeight = 34;
+           // playerHeight = tex.Height / 3;
+
             //playerOrigin = new Vector2(tex.Width / 2, tex.Height / 2);
             //playerPosition = new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
         }
@@ -98,7 +122,7 @@ namespace GameTemplate
                 float i = jump;
                 gravity += 0.15f * i;
 
-                if (position.Y + tex.Height >= 800)
+                if (position.Y + playerHeight >= 800)
                 {
                     hasjumped = false;
                 }
@@ -109,12 +133,34 @@ namespace GameTemplate
             {
                 if (position.Y < Shared.stage.Y && !isCollideUp)
                 {
-                    position.Y = Shared.stage.Y - tex.Height;
+                    position.Y = Shared.stage.Y - playerHeight;
                 }
                 else
                 {
                     gravity = 0f;
                 }
+            }
+
+            frameTime++;
+            if(frameTime >= framePause)
+            {
+                frameX++;
+                if(frameX == 1 && frameY == 2)
+                {
+                    frameX = 0;
+                    frameY = 0;
+                }
+                else if(frameX >= spriteSizeX)
+                {
+                    frameX = 0;
+                    frameY++;   
+                    if(frameY >= spriteSizeY)
+                    {
+                        frameY = 0;
+                    }
+                }
+                frameTime = 0;
+
             }
 
             base.Update(gameTime);
@@ -123,7 +169,8 @@ namespace GameTemplate
         {
             SpriteFont regular = Game.Content.Load<SpriteFont>("fonts/regularFont");
             spriteBatch.Begin();
-            spriteBatch.Draw(tex, position, null, Color.White);
+           // spriteBatch.Draw(tex, position, null, Color.White);
+            spriteBatch.Draw(tex, position, new Rectangle((tex.Width / spriteSizeX * frameX) + 9 ,(tex.Height / spriteSizeY * frameY) + 9 ,playerWidth, playerHeight), Color.White);
 
             //healthbar
             //spriteBatch.Draw(tex, new Vector2(position.X, position.Y - 20),new Rectangle((int)position.X, (int)position.Y + 10, tex.Width, 10), Color.Green);
@@ -147,7 +194,9 @@ namespace GameTemplate
         //hitbox
         public Rectangle getBounds()
         {
-            return new Rectangle((int)position.X, (int)position.Y, tex.Width, tex.Height);
+           // return new Rectangle((int)position.X, (int)position.Y, playerWidth, playerHeight);
+           return new Rectangle((tex.Width / spriteSizeX * frameX) + 9, 9, playerWidth, playerHeight);
+
         }
     }
 }

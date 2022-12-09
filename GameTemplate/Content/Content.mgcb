@@ -39,7 +39,7 @@
 /processorParam:TextureFormat=Color
 /build:images/Help2.png
 
-#begin images/Marine.png
+#begin images/marine.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -49,7 +49,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/Marine.png
+/build:images/marine.png
 
 #begin images/player.png
 /importer:TextureImporter
