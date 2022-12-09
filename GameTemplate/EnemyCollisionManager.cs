@@ -2,13 +2,13 @@
 using Microsoft.Xna.Framework;
 using SharpDX.MediaFoundation;
 using System;
+using System.Collections.Generic;
 
 namespace Survive
 {
     public class EnemyCollisionManager : GameComponent
     {
 
-        private Platform platform;
         private Enemy enemy;
         private List<Platform> platforms;
 
@@ -23,7 +23,7 @@ namespace Survive
 
         public override void Update(GameTime gameTime)
         {
-            foreach  (Platform item in platforms)
+            foreach (Platform item in platforms)
             {
                 Rectangle enemyRect = enemy.getBounds();
 
@@ -49,10 +49,10 @@ namespace Survive
                     enemy.isCollideRight = true;
                 }
 
-                //if the enemy hits the top platform by jumping (hasjumped is true) and is nopt hitting either side of the platform
+                //if the enemy hits the top platform by jumping (hasjumped is true) and is not hitting either side of the platform
                 if (enemyRect.Intersects(platformRectTop) && enemy.hasjumped && enemy.isCollideLeft == false && enemy.isCollideRight == false)
                 {
-                    //if the enemy's y coordinate is not equal to the top of theplayform then fix that
+                    //if the enemy's y coordinate is not equal to the top of the platform then fix that
                     //and set hasjumped to false and collideup to true
                     if (enemy.position.Y != platformRectTop.Top)
                     {
@@ -120,7 +120,7 @@ namespace Survive
                     }
                 }
             }
-            
+
 
 
             base.Update(gameTime);

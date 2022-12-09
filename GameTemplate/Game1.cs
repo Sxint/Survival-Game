@@ -49,6 +49,10 @@ namespace GameTemplate
 
             actionScene = new ActionScene(this);
             this.Components.Add(actionScene);
+
+            
+
+
         }
 
         private void hideAllScenes()
