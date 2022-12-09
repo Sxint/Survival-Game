@@ -175,7 +175,7 @@ namespace GameTemplate
             spriteBatch.Draw(tex, position, new Rectangle((tex.Width / spriteSizeX * frameX) + 9 ,(tex.Height / spriteSizeY * frameY) + 9 ,playerWidth, playerHeight), Color.White);
 
             //healthbar
-            spriteBatch.Draw(rect, new Vector2(position.X - 50, position.Y - 30), Color.White);
+            spriteBatch.Draw(rect, new Vector2(position.X - 15, position.Y - 30), Color.White);
 
 
             //spriteBatch.Draw(tex, position, null, Color.White, playerRotation, playerOrigin, 1, SpriteEffects.None, 1);
