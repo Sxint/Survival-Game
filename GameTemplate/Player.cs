@@ -2,6 +2,8 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
 
 namespace GameTemplate
 {
@@ -46,12 +48,15 @@ namespace GameTemplate
 
         Vector2 coor;
 
+        private SoundEffect jumpSound;
+
+
 
 
 
         public Player(Game game, SpriteBatch spriteBatch,
             Texture2D tex, int Speed, int Jump, Vector2 newPosition,
-            string test) : base(game)
+            string test, SoundEffect jumpSound) : base(game)
         {
             this.rect = new Texture2D(game.GraphicsDevice, 80, 30);
             this.spriteBatch = spriteBatch;
@@ -60,6 +65,7 @@ namespace GameTemplate
             this.speed = Speed;
             this.jump = Jump;
             this.test = test;
+            this.jumpSound = jumpSound;
             playerWidth = tex.Width / 3;
             playerHeight = 34;
             for (int i = 0; i < data.Length; i++) data[i] = Color.Chocolate;
@@ -112,6 +118,7 @@ namespace GameTemplate
                 position.Y -= jump;
                 gravity = -10f;
                 hasjumped = true;
+                jumpSound.Play(); 
             }
 
             if (hasjumped == true)
