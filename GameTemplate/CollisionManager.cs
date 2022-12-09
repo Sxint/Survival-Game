@@ -79,7 +79,7 @@ namespace Survive
 
                 if (player.isCollideRight)
                 {
-                    player.position.X = platformRectRight.Left - player.tex.Width;
+                    player.position.X = platformRectRight.Left - player.playerWidth;
                     if (player.position.Y - player.playerHeight > platformRectLeft.Height)
                     {
                         player.isCollideRight = false;
@@ -94,7 +94,7 @@ namespace Survive
 
                         player.isCollideUp = false;
                     }
-                    if (player.position.X + player.tex.Width < platformRectTop.X)
+                    if (player.position.X + player.playerWidth < platformRectTop.X)
                     {
                         player.hasjumped = true;
 
