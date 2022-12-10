@@ -58,25 +58,24 @@ namespace Survive
                         enemy.isCollideLeft = true;
                     }
 
-                    //if the enemy hits the right side of the platform
-                    //set iscolliderightt to true
+                    //right side of platform
                     if (enemyRect.Intersects(platformRectRight))
                     {
                         enemy.isCollideRight = true;
                     }
 
-                    //if the enemy hits the top platform by jumping (hasjumped is true) and is not hitting either side of the platform
+                    //TODO: Fix jump function
                     if (enemyRect.Intersects(platformRectTop) && enemy.hasjumped && enemy.isCollideLeft == false && enemy.isCollideRight == false)
                     {
-                        //if the enemy's y coordinate is not equal to the top of the platform then fix that
-                        //and set hasjumped to false and collideup to true
+
                         if (enemy.position.Y != platformRectTop.Top)
                         {
                             enemy.gravity = 0f;
                             enemy.isCollideUp = true;
-                            enemy.position.Y = platformRectTop.Top - (enemy.tex.Height);
+                            enemy.position.Y = platformRectTop.Top - (enemy.enemyHeight);
                             enemy.hasjumped = false;
                         }
+
                     }
 
                     //if the enemy hits a wall and hasjumped is not true
@@ -87,7 +86,7 @@ namespace Survive
 
                         //if the emeny's height is not higher than the platform (they are on the ground)
                         //make the enemy jump
-                        if (enemy.position.Y - enemy.tex.Height > platformRectLeft.Height)
+                        if (enemy.position.Y - enemy.enemyHeight > platformRectLeft.Height)
                         {
                             enemy.isCollideLeft = false;
                             enemy.position.Y -= enemy.jump;
@@ -96,15 +95,16 @@ namespace Survive
                         }
                     }
 
+
                     //if the enemy hits a wall and hasjumped is not true
                     if (enemy.isCollideRight && enemy.hasjumped != true)
                     {
                         //set the position of the enemy
-                        enemy.position.X = platformRectRight.Left - enemy.tex.Width;
+                        enemy.position.X = platformRectRight.Left - enemy.enemyWidth;
 
                         //if the emeny's height is not higher than the platform (they are on the ground)
                         //make the enemy jump
-                        if (enemy.position.Y - enemy.tex.Height > platformRectLeft.Height)
+                        if (enemy.position.Y - enemy.enemyHeight > platformRectLeft.Height)
                         {
                             enemy.isCollideRight = false;
                             enemy.position.Y -= enemy.jump;
@@ -127,7 +127,7 @@ namespace Survive
 
                         //if the enemy walks off the platform
                         //make it fall back to ground level
-                        if (enemy.position.X + enemy.tex.Width < platformRectTop.X && enemy.hasjumped != true)
+                        if (enemy.position.X + enemy.enemyWidth < platformRectTop.X && enemy.hasjumped != true)
                         {
                             enemy.hasjumped = true;
 

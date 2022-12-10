@@ -104,9 +104,6 @@ namespace Survive
                             player.isCollideUp = false;
                         }
                     }
-
-
-
                 }
 
 
