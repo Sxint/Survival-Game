@@ -59,9 +59,12 @@ namespace GameTemplate
 
             this.components.Add(player);
             this.components.Add(enemy);
-
             this.components.Add(Collisionmanager);
             this.components.Add(enemyCollisionManager);
+        }
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
         }
     }
 }

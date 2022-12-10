@@ -56,8 +56,6 @@ namespace GameTemplate
 
         private SoundEffect jumpSound;
 
-        MouseState previousMouseState;
-
 
         public Player(Game game, SpriteBatch spriteBatch,
             Texture2D tex, int Speed, int Jump, Vector2 newPosition,
@@ -72,10 +70,6 @@ namespace GameTemplate
             this.jumpSound = jumpSound;
             playerWidth = tex.Width / 3;
             playerHeight = 34;
-
-            previousMouseState = Mouse.GetState();
-
-
         }
 
 
@@ -103,9 +97,10 @@ namespace GameTemplate
             }
 
 
-            if (previousMouseState.LeftButton == ButtonState.Released && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
                 shoot = true;
+
             }
             else
             {
