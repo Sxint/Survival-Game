@@ -56,7 +56,9 @@ namespace GameTemplate
 
         private SoundEffect jumpSound;
 
+        public MouseState lastMouseState;
 
+        public MouseState currentMouseState;
         public Player(Game game, SpriteBatch spriteBatch,
             Texture2D tex, int Speed, int Jump, Vector2 newPosition,
             string test, SoundEffect jumpSound) : base(game)
@@ -96,11 +98,18 @@ namespace GameTemplate
                 
             }
 
+            // The active state from the last frame is now old
+            lastMouseState = currentMouseState;
 
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            // Get the mouse state relevant for this frame
+            currentMouseState = Mouse.GetState();
+
+            // Recognize a single click of the left mouse button
+            if (lastMouseState.LeftButton == ButtonState.Released && currentMouseState.LeftButton == ButtonState.Pressed)
             {
+                // React to the click
+                // ...
                 shoot = true;
-
             }
             else
             {
@@ -131,7 +140,7 @@ namespace GameTemplate
                 isCollideRight = false;
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && hasjumped == false)
+            if (Keyboard.GetState().IsKeyDown(Keys.Up) && hasjumped == false)
             {
                 position.Y -= jump;
                 gravity = -10f;
