@@ -8,6 +8,8 @@ namespace GameTemplate
 {
     public class Enemy : DrawableGameComponent
     {
+        public Game game { get; set; }
+
         public SpriteBatch spriteBatch { get; set; }
         public Texture2D tex { get; set; }
         public Vector2 position;
@@ -23,7 +25,7 @@ namespace GameTemplate
 
         public bool isCollideUp;
 
-        public bool isHit;
+        public bool isDead;
 
         public double time = 0f;
 
@@ -47,11 +49,14 @@ namespace GameTemplate
 
         public int spriteSizeY = 3;
 
+        public int killCount = 0;
+
 
         public Enemy(Game game, SpriteBatch spriteBatch,
             Texture2D tex, int Speed, int Jump, Vector2 newPosition,
             string test, Player Player) : base(game)
         {
+            this.game = game;
             this.spriteBatch = spriteBatch;
             this.tex = tex;
             position = newPosition;
@@ -63,7 +68,11 @@ namespace GameTemplate
             enemyHeight = 50;
         }
 
-
+        public Enemy CreateRandomEnemy(Vector2 position)
+        {
+            var enemy = new Enemy(game, spriteBatch, tex, speed, jump, position, test, player);
+            return enemy;
+        }
 
 
         public override void Update(GameTime gameTime)
@@ -73,6 +82,18 @@ namespace GameTemplate
             if (player.shoot)
             {
                 health--;
+            }
+
+            if(health <= 0)
+            {
+                isDead = true;
+            }
+
+            if (isDead)
+            {
+                health = 45;
+                isDead = false;
+                killCount++;
             }
 
             position.Y += gravity;
@@ -160,7 +181,10 @@ namespace GameTemplate
             spriteBatch.Begin();
             //spriteBatch.Draw(tex, position, null, Color.White);
 
-            spriteBatch.Draw(tex, position, new Rectangle((tex.Width / spriteSizeX * frameX) +9, (tex.Height / spriteSizeY * frameY) +9, enemyWidth, enemyHeight), Color.White);
+            if (!isDead)
+            {
+                spriteBatch.Draw(tex, position, new Rectangle((tex.Width / spriteSizeX * frameX) + 9, (tex.Height / spriteSizeY * frameY) + 9, enemyWidth, enemyHeight), Color.White);
+            }
 
             //spriteBatch.Draw(tex, position, null, Color.White, playerRotation, playerOrigin, 1, SpriteEffects.None, 1);
             spriteBatch.DrawString(regular, health.ToString(), new Vector2(position.X, position.Y - 20), Color.White);
@@ -169,6 +193,8 @@ namespace GameTemplate
             spriteBatch.DrawString(regular, "isCollideRight: " + isCollideRight.ToString(), new Vector2(0, 160), Color.White);
             spriteBatch.DrawString(regular, "HasJump: " + hasjumped.ToString(), new Vector2(0, 180), Color.White);
             spriteBatch.DrawString(regular, "x Position: " + position.X.ToString(), new Vector2(700, 200), Color.White);
+
+            spriteBatch.DrawString(regular, "   Kills: " + killCount.ToString(), new Vector2(900, 200), Color.White);
 
 
 
