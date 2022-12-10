@@ -56,12 +56,9 @@ namespace GameTemplate
 
         private SoundEffect jumpSound;
 
-        public MouseState cursor = Mouse.GetState();
-
         public MouseState lastMouseState;
 
         public MouseState currentMouseState;
-
         public Player(Game game, SpriteBatch spriteBatch,
             Texture2D tex, int Speed, int Jump, Vector2 newPosition,
             string test, SoundEffect jumpSound) : base(game)
@@ -114,6 +111,11 @@ namespace GameTemplate
                 // ...
                 shoot = true;
             }
+            else
+            {
+                shoot = false;
+                shoot = false;
+            }
             else { shoot = false; }
 
             position.Y += gravity;
@@ -139,8 +141,8 @@ namespace GameTemplate
                 }
                 isCollideRight = false;
             }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && hasjumped == false)
+            if (Keyboard.GetState().IsKeyDown(Keys.Up) && hasjumped == false)
+            if (Keyboard.GetState().IsKeyDown(Keys.Up) && hasjumped == false)
             {
                 position.Y -= jump;
                 gravity = -10f;
