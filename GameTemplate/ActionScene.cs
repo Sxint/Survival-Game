@@ -61,15 +61,6 @@ namespace GameTemplate
 
             this.components.Add(Collisionmanager);
             this.components.Add(enemyCollisionManager);
-            
-           
-
-
-        }
-
-        public void CreatePlatforms()
-        {
-          
         }
     }
 }

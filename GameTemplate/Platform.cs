@@ -17,8 +17,6 @@ namespace GameTemplate
         public Texture2D tex { get; set; }
 
         public Vector2 position;
-        internal object platformRectLeft;
-
         public string test { get; set; }
 
         public Platform(Game game, SpriteBatch spriteBatch,
