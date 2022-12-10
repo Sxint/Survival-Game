@@ -15,8 +15,6 @@ namespace GameTemplate
         public int jump { get; set; }
         public bool hasjumped { get; set; }
         public string test { get; set; }
-
-        public string platform;
         public float gravity { get; set; }
 
         public bool isCollideLeft;
@@ -67,8 +65,6 @@ namespace GameTemplate
             //playerRotation = (float)Math.Atan2(distance.Y, distance.X);
 
             position.Y += gravity;
-            platform = "";
-
             if (getBounds().Contains(player.position))
             {
                 player.isHit = true;
@@ -92,7 +88,7 @@ namespace GameTemplate
                 //position.X += speed;
             }
 
-            if (player.position.X >=     position.X)
+            if (player.position.X >= position.X)
             {
                 if (!isCollideLeft)
                 {
@@ -145,7 +141,6 @@ namespace GameTemplate
             spriteBatch.DrawString(regular, "isCollideLeft: " + isCollideLeft.ToString(), new Vector2(0,140), Color.White);
             spriteBatch.DrawString(regular, "isCollideRight: " + isCollideRight.ToString(), new Vector2(0, 160), Color.White);
             spriteBatch.DrawString(regular, "HasJump: " + hasjumped.ToString(), new Vector2(0, 180), Color.White);
-            spriteBatch.DrawString(regular, "Platform: " + platform.ToString(), new Vector2(0, 200), Color.White);
             spriteBatch.DrawString(regular, "x Position: " + position.X.ToString(), new Vector2(700, 200), Color.White);
 
 

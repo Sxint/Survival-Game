@@ -40,7 +40,6 @@ namespace Survive
 
                 if (enemyRect.Intersects(platformRect))
                 {
-                    enemy.platform = platforms.IndexOf(item).ToString();
                     Activeplatform = platforms.ElementAtOrDefault(platforms.IndexOf(item));
                 }
 
