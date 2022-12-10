@@ -114,9 +114,7 @@ namespace GameTemplate
             else
             {
                 shoot = false;
-                shoot = false;
             }
-            else { shoot = false; }
 
             position.Y += gravity;
             platform = "";
