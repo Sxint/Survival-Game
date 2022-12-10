@@ -29,6 +29,8 @@ namespace GameTemplate
 
         public double time = 0f;
 
+        public double timeTotal = 0f;
+
         public int spriteSizeX = 3;
 
         public int spriteSizeY = 3;
@@ -49,6 +51,9 @@ namespace GameTemplate
 
         public string platform;
 
+        public int score = 0;
+
+        public bool isDead;
 
         Texture2D rect;
 
@@ -76,16 +81,29 @@ namespace GameTemplate
         }
 
 
-
+       
 
         public override void Update(GameTime gameTime)
         {
-            time += gameTime.ElapsedGameTime.TotalMilliseconds;
+            time += gameTime.ElapsedGameTime.TotalSeconds;
+            timeTotal += gameTime.ElapsedGameTime.TotalSeconds;
 
-            if(health <= 0)
+            if (health <= 0)
             {
                 position = new Vector2(9803, 7589);
+                isDead = true;
             }
+
+            if (!isDead)
+            {
+                if (time  >= 1)
+                {
+                    score++;
+                    time = 0;
+                }
+                
+            }
+           
 
             //very common mistake - never write the following line
             //KeyboardState x = new KeyboardState();
@@ -199,6 +217,8 @@ namespace GameTemplate
             spriteBatch.DrawString(regular, "isHit: " + isHit.ToString(), new Vector2(0, 300), Color.White);
             spriteBatch.DrawString(regular, "Health: " + health.ToString(), new Vector2(0, 320), Color.White);
             spriteBatch.DrawString(regular, "platform: " + platform.ToString(), new Vector2(0, 340), Color.White);
+            spriteBatch.DrawString(regular, "Time alive: " + timeTotal.ToString(), new Vector2(0, 400), Color.White);
+            spriteBatch.DrawString(regular, "Score: " + score.ToString(), new Vector2(0, 420), Color.White);
 
             spriteBatch.End();
             base.Draw(gameTime);
