@@ -46,7 +46,10 @@ namespace GameTemplate
         public int frameTime = 0;
 
         public int health = 100;
-        
+
+        public string platform;
+
+
         Texture2D rect;
 
         private SoundEffect jumpSound;
@@ -97,6 +100,8 @@ namespace GameTemplate
             //playerRotation = (float)Math.Atan2(distance.Y, distance.X);
 
             position.Y += gravity;
+                        platform = "";
+
 
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
@@ -104,8 +109,7 @@ namespace GameTemplate
                 {
                     position.X += speed;
                 }    
-                //isCollideLeft = false;
-                //position.X += speed;
+                isCollideLeft = false;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
@@ -194,7 +198,7 @@ namespace GameTemplate
             spriteBatch.DrawString(regular, "Player Y Position: " + position.Y.ToString(), new Vector2(0, 100), Color.White);
             spriteBatch.DrawString(regular, "isHit: " + isHit.ToString(), new Vector2(0, 300), Color.White);
             spriteBatch.DrawString(regular, "Health: " + health.ToString(), new Vector2(0, 320), Color.White);
-
+            spriteBatch.DrawString(regular, "platform: " + platform.ToString(), new Vector2(0, 340), Color.White);
 
             spriteBatch.End();
             base.Draw(gameTime);
@@ -204,8 +208,8 @@ namespace GameTemplate
         //hitbox
         public Rectangle getBounds()
         {
-           // return new Rectangle((int)position.X, (int)position.Y, playerWidth, playerHeight);
-           return new Rectangle((tex.Width / spriteSizeX * frameX) + 9, 9, playerWidth, playerHeight);
+           return new Rectangle((int)position.X, (int)position.Y, playerWidth, playerHeight);
+           //return new Rectangle((tex.Width / spriteSizeX * frameX) + 9, 9, playerWidth, playerHeight);
 
         }
     }

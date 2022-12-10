@@ -39,9 +39,8 @@ namespace GameTemplate
             spriteBatch.Draw(tex, getRightBounds(), Color.Red);
             spriteBatch.Draw(tex, getLeftBounds(), Color.Blue);
 
-            spriteBatch.DrawString(regular, position.Y.ToString(), new Vector2(position.X, position.Y), Color.White);
-            spriteBatch.DrawString(regular, "Platform Right Position: " + getTopBounds().Right.ToString(), new Vector2(500, 0), Color.White);
-            spriteBatch.DrawString(regular, "Platform Left Position: " + getTopBounds().Left.ToString(), new Vector2(500, 20), Color.White);
+            spriteBatch.DrawString(regular, "Platform Left Position: " + getLeftBounds().Top.ToString(), new Vector2(500, 20), Color.White);
+
             spriteBatch.End();
             base.Draw(gameTime);
         }
