@@ -25,6 +25,8 @@ namespace GameTemplate
 
         public bool isCollideUp;
 
+        public bool isHit;
+
         public double time = 0f;
 
         public Player player;     
@@ -68,7 +70,12 @@ namespace GameTemplate
             position.Y += gravity;
             platform = "";
 
-            if (player.position.X < position.X)
+            if (player.position.X + 2 == position.X )
+            {
+                player.position = new Vector2(0, 0);
+            }
+
+            if (player.position.X <= position.X)
             {
                 if (!isCollideLeft)
                 {
@@ -132,6 +139,8 @@ namespace GameTemplate
             spriteBatch.DrawString(regular, "isCollideRight: " + isCollideRight.ToString(), new Vector2(0, 160), Color.White);
             spriteBatch.DrawString(regular, "HasJump: " + hasjumped.ToString(), new Vector2(0, 180), Color.White);
             spriteBatch.DrawString(regular, "Platform: " + platform.ToString(), new Vector2(0, 200), Color.White);
+            spriteBatch.DrawString(regular, "x Position: " + position.X.ToString(), new Vector2(700, 200), Color.White);
+
 
 
 
