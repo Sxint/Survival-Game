@@ -1,10 +1,7 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Media;
-using Survive;
 
 namespace GameTemplate
 {
@@ -55,9 +52,12 @@ namespace GameTemplate
 
         public bool isDead;
 
-        Texture2D rect;
+        public bool shoot;
 
         private SoundEffect jumpSound;
+
+        MouseState previousMouseState;
+
 
         public Player(Game game, SpriteBatch spriteBatch,
             Texture2D tex, int Speed, int Jump, Vector2 newPosition,
@@ -72,16 +72,14 @@ namespace GameTemplate
             this.jumpSound = jumpSound;
             playerWidth = tex.Width / 3;
             playerHeight = 34;
-            this.rect = new Texture2D(game.GraphicsDevice, playerWidth, 5);
-            Color[] data = new Color[playerWidth * 5];
 
-            for (int i = 0; i < data.Length; i++) data[i] = Color.Chocolate;
-            rect.SetData(data);
+            previousMouseState = Mouse.GetState();
+
 
         }
 
 
-       
+
 
         public override void Update(GameTime gameTime)
         {
@@ -103,19 +101,16 @@ namespace GameTemplate
                 }
                 
             }
-           
 
-            //very common mistake - never write the following line
-            //KeyboardState x = new KeyboardState();
-            //------------------------------------------
 
-            //MouseState mouse = Mouse.GetState();
-
-            //Make the player face the mouse
-
-            //var distance = new Vector2(mouse.X - playerPosition.X, mouse.Y - playerPosition.Y);
-
-            //playerRotation = (float)Math.Atan2(distance.Y, distance.X);
+            if (previousMouseState.LeftButton == ButtonState.Released && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                shoot = true;
+            }
+            else
+            {
+                shoot = false;
+            }
 
             position.Y += gravity;
             platform = "";
@@ -203,7 +198,6 @@ namespace GameTemplate
             spriteBatch.Draw(tex, position, new Rectangle((tex.Width / spriteSizeX * frameX) + 9 ,(tex.Height / spriteSizeY * frameY) + 9 ,playerWidth, playerHeight), Color.White);
 
             //healthbar
-            spriteBatch.Draw(rect, new Vector2(position.X - 15, position.Y - 30), Color.White);
 
 
             //spriteBatch.Draw(tex, position, null, Color.White, playerRotation, playerOrigin, 1, SpriteEffects.None, 1);
@@ -219,6 +213,8 @@ namespace GameTemplate
             spriteBatch.DrawString(regular, "platform: " + platform.ToString(), new Vector2(0, 340), Color.White);
             spriteBatch.DrawString(regular, "Time alive: " + timeTotal.ToString(), new Vector2(0, 400), Color.White);
             spriteBatch.DrawString(regular, "Score: " + score.ToString(), new Vector2(0, 420), Color.White);
+            spriteBatch.DrawString(regular, "isShooting?: " + shoot.ToString(), new Vector2(0, 440), Color.White);
+
 
             spriteBatch.End();
             base.Draw(gameTime);

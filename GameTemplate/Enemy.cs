@@ -33,6 +33,8 @@ namespace GameTemplate
 
         public int enemyHeight;
 
+        public int health = 45;
+
         public int frameX = 0;
 
         public int frameY = 0;
@@ -67,6 +69,11 @@ namespace GameTemplate
         public override void Update(GameTime gameTime)
         {
             time += gameTime.ElapsedGameTime.TotalSeconds;
+
+            if (player.shoot)
+            {
+                health--;
+            }
 
             position.Y += gravity;
             if (getBounds().Contains(player.position) && time >= 1)
@@ -156,7 +163,7 @@ namespace GameTemplate
             spriteBatch.Draw(tex, position, new Rectangle((tex.Width / spriteSizeX * frameX) +9, (tex.Height / spriteSizeY * frameY) +9, enemyWidth, enemyHeight), Color.White);
 
             //spriteBatch.Draw(tex, position, null, Color.White, playerRotation, playerOrigin, 1, SpriteEffects.None, 1);
-            spriteBatch.DrawString(regular, position.Y.ToString(), new Vector2(position.X, position.Y), Color.White);
+            spriteBatch.DrawString(regular, health.ToString(), new Vector2(position.X, position.Y - 20), Color.White);
             spriteBatch.DrawString(regular, "isCollideUp: " + isCollideUp.ToString(), new Vector2(0, 120), Color.White);
             spriteBatch.DrawString(regular, "isCollideLeft: " + isCollideLeft.ToString(), new Vector2(0,140), Color.White);
             spriteBatch.DrawString(regular, "isCollideRight: " + isCollideRight.ToString(), new Vector2(0, 160), Color.White);
