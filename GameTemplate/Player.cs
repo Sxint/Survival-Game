@@ -116,6 +116,7 @@ namespace GameTemplate
                 if(!isCollideLeft)
                 {
                     position.X += speed;
+                    CreateFrames();
                 }    
                 isCollideLeft = false;
             }
@@ -125,6 +126,7 @@ namespace GameTemplate
                 if (!isCollideRight)
                 {
                     position.X -= speed;
+                    CreateFrames();
                 }
                 isCollideRight = false;
             }
@@ -134,7 +136,8 @@ namespace GameTemplate
                 position.Y -= jump;
                 gravity = -10f;
                 hasjumped = true;
-                jumpSound.Play(); 
+                jumpSound.Play();
+                CreateFrames();
             }
 
             if (hasjumped == true)
@@ -161,20 +164,27 @@ namespace GameTemplate
                 }
             }
 
+            
+
+            base.Update(gameTime);
+        }
+
+        public void CreateFrames()
+        {
             frameTime++;
-            if(frameTime >= framePause)
+            if (frameTime >= framePause)
             {
                 frameX++;
-                if(frameX == 1 && frameY == 2)
+                if (frameX == 1 && frameY == 2)
                 {
                     frameX = 0;
                     frameY = 0;
                 }
-                else if(frameX >= spriteSizeX)
+                else if (frameX >= spriteSizeX)
                 {
                     frameX = 0;
-                    frameY++;   
-                    if(frameY >= spriteSizeY)
+                    frameY++;
+                    if (frameY >= spriteSizeY)
                     {
                         frameY = 0;
                     }
@@ -182,8 +192,6 @@ namespace GameTemplate
                 frameTime = 0;
 
             }
-
-            base.Update(gameTime);
         }
         public override void Draw(GameTime gameTime)
         {
