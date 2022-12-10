@@ -59,9 +59,6 @@ namespace GameTemplate
             this.player = Player;
             enemyWidth = tex.Width / 3;
             enemyHeight = 50;
-
-            //playerOrigin = new Vector2(tex.Width / 2, tex.Height / 2);
-            //playerPosition = new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2);
         }
 
 
@@ -89,14 +86,11 @@ namespace GameTemplate
                 player.isHit = true;
                 player.health -= 1;
             }
-            //if (player.position.X == getBounds().Left || player.position.X + 2 == getBounds().Left || player.position.X == getBounds().Left)
-            //{
-            //    player.isHit = true;
-            //}
             else
             {
                 player.isHit = false;
             }
+
             if (player.position.X <= position.X)
             {
                 if (!isCollideLeft)
@@ -104,7 +98,6 @@ namespace GameTemplate
                     position.X -= 4;
                 }
                 isCollideLeft = false;
-                //position.X += speed;
             }
 
             if (player.position.X >= position.X)
@@ -113,14 +106,11 @@ namespace GameTemplate
                 {
                     position.X += 4;
                 }
-
                 isCollideRight = false;
-                //position.X += speed;
             }
 
             if (hasjumped == true)
             {
-
                 float i = jump;
                 gravity += 0.15f * i;
 
@@ -162,7 +152,6 @@ namespace GameTemplate
                     }
                 }
                 frameTime = 0;
-
             }
 
             base.Update(gameTime);
@@ -197,8 +186,8 @@ namespace GameTemplate
     //hitbox
     public Rectangle getBounds()
         {
-           // return new Rectangle((int)position.X, (int)position.Y, tex.Width, tex.Height);
-            return new Rectangle((tex.Width / spriteSizeX * frameX) + 9, 9, enemyWidth, enemyHeight);
+           return new Rectangle((int)position.X, (int)position.Y, enemyWidth, enemyHeight);
+           //return new Rectangle((tex.Width / spriteSizeX * frameX) + 9, 9, enemyWidth, enemyHeight);
 
         }
     }

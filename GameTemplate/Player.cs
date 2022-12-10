@@ -100,7 +100,7 @@ namespace GameTemplate
             //playerRotation = (float)Math.Atan2(distance.Y, distance.X);
 
             position.Y += gravity;
-                        platform = "";
+            platform = "";
 
 
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
