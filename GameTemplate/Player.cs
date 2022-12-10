@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
+using Survive;
 
 namespace GameTemplate
 {
@@ -24,6 +25,8 @@ namespace GameTemplate
 
         public bool isCollideUp;
 
+        public bool isHit;
+
         public double time = 0f;
 
         public int spriteSizeX = 3;
@@ -42,13 +45,11 @@ namespace GameTemplate
 
         public int frameTime = 0;
 
+        public int health = 100;
+        
         Texture2D rect;
 
-
-
         private SoundEffect jumpSound;
-
-
 
         public Player(Game game, SpriteBatch spriteBatch,
             Texture2D tex, int Speed, int Jump, Vector2 newPosition,
@@ -77,6 +78,11 @@ namespace GameTemplate
         public override void Update(GameTime gameTime)
         {
             time += gameTime.ElapsedGameTime.TotalMilliseconds;
+
+            if(health <= 0)
+            {
+                position = new Vector2(9803, 7589);
+            }
 
             //very common mistake - never write the following line
             //KeyboardState x = new KeyboardState();
@@ -186,6 +192,9 @@ namespace GameTemplate
             spriteBatch.DrawString(regular, "HasJump: " + hasjumped.ToString(), new Vector2(0, 60), Color.White);
             spriteBatch.DrawString(regular, "Player X Position: " + position.X.ToString(), new Vector2(0, 80), Color.White);
             spriteBatch.DrawString(regular, "Player Y Position: " + position.Y.ToString(), new Vector2(0, 100), Color.White);
+            spriteBatch.DrawString(regular, "isHit: " + isHit.ToString(), new Vector2(0, 300), Color.White);
+            spriteBatch.DrawString(regular, "Health: " + health.ToString(), new Vector2(0, 320), Color.White);
+
 
             spriteBatch.End();
             base.Draw(gameTime);

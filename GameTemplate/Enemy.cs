@@ -29,8 +29,7 @@ namespace GameTemplate
 
         public double time = 0f;
 
-        public Player player;     
-
+        public Player player;
 
 
         public Enemy(Game game, SpriteBatch spriteBatch,
@@ -70,26 +69,34 @@ namespace GameTemplate
             position.Y += gravity;
             platform = "";
 
-            if (player.position.X + 2 == position.X )
+            if (getBounds().Contains(player.position))
             {
-                player.position = new Vector2(0, 0);
+                player.isHit = true;
+                player.health -= 1;
             }
-
+            //if (player.position.X == getBounds().Left || player.position.X + 2 == getBounds().Left || player.position.X == getBounds().Left)
+            //{
+            //    player.isHit = true;
+            //}
+            else
+            {
+                player.isHit = false;
+            }
             if (player.position.X <= position.X)
             {
                 if (!isCollideLeft)
                 {
-                    position.X -= 3;
+                    position.X -= 4;
                 }
                 isCollideLeft = false;
                 //position.X += speed;
             }
 
-            if (player.position.X > position.X)
+            if (player.position.X >=     position.X)
             {
                 if (!isCollideLeft)
                 {
-                    position.X += 3;
+                    position.X += 4;
                 }
 
                 isCollideRight = false;

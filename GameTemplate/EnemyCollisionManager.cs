@@ -27,10 +27,16 @@ namespace Survive
         {
             foreach (Platform item in platforms)
             {
+                Rectangle playerRect = enemy.player.getBounds();
+
                 Rectangle enemyRect = enemy.getBounds();
 
                 Rectangle platformRect = item.getBounds();
 
+                if (playerRect.Intersects(enemyRect))
+                {
+                    enemy.player.isHit = true;
+                }
 
                 if (enemyRect.Intersects(platformRect))
                 {
