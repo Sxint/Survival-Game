@@ -32,6 +32,7 @@ namespace GameTemplate
             menu = new MenuComponent(game, spriteBatch, regular, hilight, menuItems);
             this.components.Add(menu);
 
+
             //Added music
             Song backgroundMusic = g.Content.Load<Song>("songs/InGameMusic");
             MediaPlayer.IsRepeating = true;

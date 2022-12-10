@@ -18,7 +18,7 @@ namespace GameTemplate
         private SpriteBatch spriteBatch;
         private Game1 g;
         //declare all game related components
-        private Player bat;
+        private Player player;
         private Platform platform, platform2;
         public CollisionManager Collisionmanager;
         private Enemy enemy;
@@ -32,9 +32,10 @@ namespace GameTemplate
             platforms = new List<Platform>();
             Texture2D batTex = g.Content.Load<Texture2D>("images/player");
             Texture2D playerTex = g.Content.Load<Texture2D>("images/marine");
+            Texture2D enemyTex = g.Content.Load<Texture2D>("images/zerglig");
             SoundEffect jumpSound = g.Content.Load<SoundEffect>("songs/jump");
-            Vector2 batPos = new Vector2(Shared.stage.X / 2 - batTex.Width / 2,Shared.stage.Y - batTex.Height);
-            Vector2 batPos2 = new Vector2((Shared.stage.X / 2 - batTex.Width / 2) + 20 , Shared.stage.Y - batTex.Height);
+            Vector2 playerPos = new Vector2(Shared.stage.X / 2 - batTex.Width / 2,Shared.stage.Y - playerTex.Height);
+            Vector2 enemyPos = new Vector2((Shared.stage.X / 2 - batTex.Width / 2) + 20 , Shared.stage.Y - enemyTex.Height);
             Vector2 platformPos = new Vector2(200, Shared.stage.Y - batTex.Height);
             Vector2 platformPos2 = new Vector2(800, Shared.stage.Y - batTex.Height);
 
@@ -49,14 +50,14 @@ namespace GameTemplate
             int jump2 = 3;
 
            
-            bat = new Player(game, spriteBatch, playerTex,  playerSpeed, jump, batPos, "test", jumpSound);
-            enemy = new Enemy(game, spriteBatch, batTex, playerSpeed, jump2, batPos2, "test", bat);
-            Collisionmanager = new CollisionManager(g, bat, platforms);
+            player = new Player(game, spriteBatch, playerTex,  playerSpeed, jump, playerPos, "test", jumpSound);
+            enemy = new Enemy(game, spriteBatch, enemyTex, playerSpeed, jump2, enemyPos, "test", player);
+            Collisionmanager = new CollisionManager(g, player, platforms);
             enemyCollisionManager = new EnemyCollisionManager(g, enemy, platforms);
             this.components.Add(platform);
             this.components.Add(platform2);
 
-            this.components.Add(bat);
+            this.components.Add(player);
             this.components.Add(enemy);
 
             this.components.Add(Collisionmanager);
