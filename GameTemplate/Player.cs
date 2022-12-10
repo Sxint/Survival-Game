@@ -56,6 +56,11 @@ namespace GameTemplate
 
         private SoundEffect jumpSound;
 
+        public MouseState cursor = Mouse.GetState();
+
+        public MouseState lastMouseState;
+
+        public MouseState currentMouseState;
 
         public Player(Game game, SpriteBatch spriteBatch,
             Texture2D tex, int Speed, int Jump, Vector2 newPosition,
@@ -96,16 +101,20 @@ namespace GameTemplate
                 
             }
 
+            // The active state from the last frame is now old
+            lastMouseState = currentMouseState;
 
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            // Get the mouse state relevant for this frame
+            currentMouseState = Mouse.GetState();
+
+            // Recognize a single click of the left mouse button
+            if (lastMouseState.LeftButton == ButtonState.Released && currentMouseState.LeftButton == ButtonState.Pressed)
             {
+                // React to the click
+                // ...
                 shoot = true;
-
             }
-            else
-            {
-                shoot = false;
-            }
+            else { shoot = false; }
 
             position.Y += gravity;
             platform = "";
