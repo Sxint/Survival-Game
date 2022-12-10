@@ -66,25 +66,14 @@ namespace GameTemplate
 
         public override void Update(GameTime gameTime)
         {
-            time += gameTime.ElapsedGameTime.TotalMilliseconds;
-
-            //very common mistake - never write the following line
-            //KeyboardState x = new KeyboardState();
-            //------------------------------------------
-
-            //MouseState mouse = Mouse.GetState();
-
-            //Make the player face the mouse
-
-            //var distance = new Vector2(mouse.X - playerPosition.X, mouse.Y - playerPosition.Y);
-
-            //playerRotation = (float)Math.Atan2(distance.Y, distance.X);
+            time += gameTime.ElapsedGameTime.TotalSeconds;
 
             position.Y += gravity;
-            if (getBounds().Contains(player.position))
+            if (getBounds().Contains(player.position) && time >= 1)
             {
-                player.isHit = true;
-                player.health -= 1;
+                    player.health -= 1;
+                    player.isHit = true;
+                    time = 0;
             }
             else
             {
