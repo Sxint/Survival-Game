@@ -122,7 +122,11 @@ namespace GameTemplate
 
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                if(!isCollideLeft)
+                if (position.X > Shared.stage.X - playerWidth)
+                {
+                    position = new Vector2(Shared.stage.X - playerWidth, position.Y);
+                }
+                else if (!isCollideLeft)
                 {
                     position.X += speed;
                     CreateFrames();
@@ -130,16 +134,19 @@ namespace GameTemplate
                 isCollideLeft = false;
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            if (Keyboard.GetState().IsKeyDown(Keys.Left) )
             {
-                if (!isCollideRight)
+                if (position.X < 0)
+                {
+                    position = new Vector2(0, position.Y);
+                }
+                else if (!isCollideRight)
                 {
                     position.X -= speed;
                     CreateFrames();
                 }
                 isCollideRight = false;
             }
-
             if (Keyboard.GetState().IsKeyDown(Keys.Up) && hasjumped == false)
             {
                 position.Y -= jump;

@@ -105,8 +105,6 @@ namespace Survive
                         }
                     }
                 }
-
-
             }
             base.Update(gameTime);
         }
