@@ -52,6 +52,8 @@ namespace GameTemplate
 
         public int killCount = 0;
 
+        public bool debugMode;
+
 
         public Enemy(Game game, SpriteBatch spriteBatch,
             Texture2D tex, int Speed, int Jump, Vector2 newPosition,
@@ -83,6 +85,7 @@ namespace GameTemplate
             if (player.shoot)
             {
                 health -= 5;
+
             }
 
             if(health <= 0)
@@ -95,7 +98,7 @@ namespace GameTemplate
                 health = 45;
                 isDead = false;
                 killCount++;
-                player.score++;
+                player.score += 5;
             }
 
             position.Y += gravity;
@@ -111,22 +114,35 @@ namespace GameTemplate
                 player.isHit = false;
             }
 
-            if (player.position.X <= position.X + enemyWidth)
+            if (!player.isDead)
             {
-                if (!isCollideLeft)
+                if (player.position.X <= position.X + enemyWidth)
                 {
-                    position.X -= 3;
+                    if (!isCollideLeft)
+                    {
+                        position.X -= 3;
+                    }
+                    isCollideLeft = false;
                 }
-                isCollideLeft = false;
+
+                if (player.position.X + player.playerWidth / 2 >= position.X)
+                {
+                    if (!isCollideLeft)
+                    {
+                        position.X += 3;
+                    }
+                    isCollideRight = false;
+                }
             }
 
-            if (player.position.X + player.playerWidth/2 >= position.X)
+            if (Keyboard.GetState().IsKeyDown(Keys.Tab))
             {
-                if (!isCollideLeft)
-                {
-                    position.X += 3;
-                }
-                isCollideRight = false;
+                debugMode = true;
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.CapsLock))
+            {
+                debugMode = false;
             }
 
             if (hasjumped == true)
@@ -189,20 +205,38 @@ namespace GameTemplate
                 spriteBatch.Draw(tex, position, new Rectangle((tex.Width / spriteSizeX * frameX) + 9, (tex.Height / spriteSizeY * frameY) + 9, enemyWidth, enemyHeight), Color.White);
             }
 
-            //spriteBatch.Draw(tex, position, null, Color.White, playerRotation, playerOrigin, 1, SpriteEffects.None, 1);
             spriteBatch.DrawString(regular, health.ToString(), new Vector2(position.X, position.Y - 20), Color.White);
-            spriteBatch.DrawString(regular, "isCollideUp: " + isCollideUp.ToString(), new Vector2(0, 120), Color.White);
-            spriteBatch.DrawString(regular, "isCollideLeft: " + isCollideLeft.ToString(), new Vector2(0,140), Color.White);
-            spriteBatch.DrawString(regular, "isCollideRight: " + isCollideRight.ToString(), new Vector2(0, 160), Color.White);
-            spriteBatch.DrawString(regular, "HasJump: " + hasjumped.ToString(), new Vector2(0, 180), Color.White);
-            spriteBatch.DrawString(regular, "x Position: " + position.X.ToString(), new Vector2(700, 200), Color.White);
-
-            spriteBatch.DrawString(regular, "   Kills: " + killCount.ToString(), new Vector2(900, 200), Color.White);
-
-
-
-
-
+            if (debugMode)
+            {
+                spriteBatch.DrawString(regular, "enemy.isCollideUp: " + isCollideUp.ToString(), new Vector2(800, 0), Color.White);
+                spriteBatch.DrawString(regular, "enemy.isCollideLeft: " + isCollideLeft.ToString(), new Vector2(800, 20), Color.White);
+                spriteBatch.DrawString(regular, "enemy.isCollideRight: " + isCollideRight.ToString(), new Vector2(800, 40), Color.White);
+                spriteBatch.DrawString(regular, "Enemy X Position: " + position.X.ToString(), new Vector2(800, 60), Color.White);
+                spriteBatch.DrawString(regular, "Enemy Y Position: " + position.Y.ToString(), new Vector2(800, 80), Color.White);
+                spriteBatch.DrawString(regular, "Enemy.HasJump: " + hasjumped.ToString(), new Vector2(800, 100), Color.White);
+                spriteBatch.DrawString(regular, "Enemy Health: " + health.ToString(), new Vector2(800, 120), Color.White);
+                spriteBatch.DrawString(regular, "Enemy Width: " + enemyWidth.ToString(), new Vector2(800, 140), Color.White);
+                spriteBatch.DrawString(regular, "Enemy Height: " + enemyHeight.ToString(), new Vector2(800, 160), Color.White);
+                spriteBatch.DrawString(regular, "Is Enemy Dead? " + isDead.ToString(), new Vector2(800, 180), Color.White);
+                spriteBatch.DrawString(regular, "Player.isCollideUp: " + player.isCollideUp.ToString(), new Vector2(0, 0), Color.White);
+                spriteBatch.DrawString(regular, "Player.isCollideLeft: " + player.isCollideLeft.ToString(), new Vector2(0, 20), Color.White);
+                spriteBatch.DrawString(regular, "Player.isCollideRight: " + player.isCollideRight.ToString(), new Vector2(0, 40), Color.White);
+                spriteBatch.DrawString(regular, "Player.HasJump: " + player.hasjumped.ToString(), new Vector2(0, 60), Color.White);
+                spriteBatch.DrawString(regular, "Player X Position: " + player.position.X.ToString(), new Vector2(0, 80), Color.White);
+                spriteBatch.DrawString(regular, "Player Y Position: " + player.position.Y.ToString(), new Vector2(0, 100), Color.White);
+                spriteBatch.DrawString(regular, "Player.isHit: " + player.isHit.ToString(), new Vector2(0, 120), Color.White);
+                spriteBatch.DrawString(regular, "Player Health: " + player.health.ToString(), new Vector2(0, 140), Color.White);
+                spriteBatch.DrawString(regular, "Time alive: " + player.timeTotal.ToString(), new Vector2(0, 180), Color.White);
+                spriteBatch.DrawString(regular, "Score: " + player.score.ToString(), new Vector2(0, 200), Color.White);
+                spriteBatch.DrawString(regular, "Is the Player Shooting? " + player.shoot.ToString(), new Vector2(0, 220), Color.White);
+                spriteBatch.DrawString(regular, "PRESS TO CAPS LOCK TO ESCAPE", new Vector2(0, 240), Color.White);
+            }
+            else
+            {
+                spriteBatch.DrawString(regular, "Kills: " + killCount.ToString(), new Vector2(0, 40), Color.White);
+                spriteBatch.DrawString(regular, "Health: " + player.health.ToString(), new Vector2(0, 0), Color.White);
+                spriteBatch.DrawString(regular, "Score: " + player.score.ToString(), new Vector2(0, 20), Color.White);
+            }
             spriteBatch.End();
             base.Draw(gameTime);
         }
