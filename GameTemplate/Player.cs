@@ -13,7 +13,6 @@ namespace GameTemplate
         public int speed { get; set; }
         public int jump { get; set; }
         public bool hasjumped { get; set; }
-        public string test { get; set; }
         public float gravity { get; set; }
 
         public bool isCollideLeft;
@@ -64,15 +63,13 @@ namespace GameTemplate
 
         public MouseState currentMouseState;
         public Player(Game game, SpriteBatch spriteBatch,
-            Texture2D tex, int Speed, int Jump, Vector2 newPosition,
-            string test, SoundEffect jumpSound, SoundEffect gunSound) : base(game)
+            Texture2D tex, int Speed, int Jump, Vector2 newPosition, SoundEffect jumpSound, SoundEffect gunSound) : base(game)
         {
             this.spriteBatch = spriteBatch;
             this.tex = tex;
             position = newPosition;
             this.speed = Speed;
             this.jump = Jump;
-            this.test = test;
             this.jumpSound = jumpSound;
             playerWidth = tex.Width / 3;
             playerHeight = 34;
