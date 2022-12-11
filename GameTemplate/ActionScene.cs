@@ -55,8 +55,8 @@ namespace GameTemplate
             int enemyJumpStrength = 3;
 
            
-            player = new Player(game, spriteBatch, playerTex,  playerSpeed, playerJumpStrength, playerPos, "test", jumpSound, gunSound);
-            enemy = new Enemy(game, spriteBatch, enemyTex, playerSpeed, enemyJumpStrength, enemyPos, "test", player);
+            player = new Player(game, spriteBatch, playerTex,  playerSpeed, playerJumpStrength, playerPos, jumpSound, gunSound);
+            enemy = new Enemy(game, spriteBatch, enemyTex, playerSpeed, enemyJumpStrength, enemyPos, player);
             Collisionmanager = new CollisionManager(g, player, platforms);
             enemyCollisionManager = new EnemyCollisionManager(g, enemy, platforms);
             this.components.Add(platform);

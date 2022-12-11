@@ -56,8 +56,7 @@ namespace GameTemplate
 
 
         public Enemy(Game game, SpriteBatch spriteBatch,
-            Texture2D tex, int Speed, int Jump, Vector2 newPosition,
-            string test, Player Player) : base(game)
+            Texture2D tex, int Speed, int Jump, Vector2 newPosition , Player Player) : base(game)
         {
             this.game = game;
             this.spriteBatch = spriteBatch;
@@ -65,7 +64,6 @@ namespace GameTemplate
             position = newPosition;
             this.speed = Speed;
             this.jump = Jump;
-            this.test = test;
             this.player = Player;
             enemyWidth = tex.Width / 3;
             enemyHeight = 50;
@@ -73,7 +71,7 @@ namespace GameTemplate
 
         public Enemy CreateRandomEnemy(Vector2 position)
         {
-            var enemy = new Enemy(game, spriteBatch, tex, speed, jump, position, test, player);
+            var enemy = new Enemy(game, spriteBatch, tex, speed, jump, position, player);
             return enemy;
         }
 
