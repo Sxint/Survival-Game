@@ -58,12 +58,14 @@ namespace GameTemplate
 
         private SoundEffect jumpSound;
 
+        private SoundEffect gunSound;
+
         public MouseState lastMouseState;
 
         public MouseState currentMouseState;
         public Player(Game game, SpriteBatch spriteBatch,
             Texture2D tex, int Speed, int Jump, Vector2 newPosition,
-            string test, SoundEffect jumpSound) : base(game)
+            string test, SoundEffect jumpSound, SoundEffect gunSound) : base(game)
         {
             this.spriteBatch = spriteBatch;
             this.tex = tex;
@@ -74,6 +76,7 @@ namespace GameTemplate
             this.jumpSound = jumpSound;
             playerWidth = tex.Width / 3;
             playerHeight = 34;
+            this.gunSound=gunSound;
         }
 
 
@@ -113,6 +116,7 @@ namespace GameTemplate
                 // React to the click
                 // ...
                 shoot = true;
+                gunSound.Play();
             }
             else
             {
