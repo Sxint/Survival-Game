@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using SharpDX.Direct3D9;
 
-namespace GameTemplate
+namespace Survive
 {
     public class Platform : DrawableGameComponent
     {

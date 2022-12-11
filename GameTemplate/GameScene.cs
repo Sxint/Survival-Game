@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace GameTemplate
+namespace Survive
 {
     public abstract class GameScene : DrawableGameComponent
     {
@@ -15,13 +15,13 @@ namespace GameTemplate
 
         public virtual void show()
         {
-            this.Enabled = true;
-            this.Visible = true;
+            Enabled = true;
+            Visible = true;
         }
         public virtual void hide()
         {
-            this.Enabled = false;
-            this.Visible = false;
+            Enabled = false;
+            Visible = false;
         }
 
 
@@ -54,7 +54,7 @@ namespace GameTemplate
                     {
                         comp.Draw(gameTime);
                     }
-                
+
                 }
             }
 

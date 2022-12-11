@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Media;
 
-namespace GameTemplate
+namespace Survive
 {
     //this is the main menu
     public class StartScene : GameScene
@@ -20,18 +20,18 @@ namespace GameTemplate
         private SpriteBatch spriteBatch;
         Game1 g;
         string title = "Ohio Simulator";
-        string[] menuItems = {"Start", "Help", "About", "Credit", "Quit" };
+        string[] menuItems = { "Start", "Help", "About", "Credit", "Quit" };
 
 
         public StartScene(Game game) : base(game)
         {
             g = (Game1)game;
-            this.spriteBatch = g._spriteBatch;
+            spriteBatch = g._spriteBatch;
             //instantiate menu here
             SpriteFont regular = g.Content.Load<SpriteFont>("fonts/regularFont");
             SpriteFont hilight = game.Content.Load<SpriteFont>("fonts/hilightFont");
             menu = new MenuComponent(game, spriteBatch, regular, hilight, menuItems, title);
-            this.components.Add(menu);
+            components.Add(menu);
 
 
             //Added music

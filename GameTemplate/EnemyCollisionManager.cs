@@ -1,5 +1,4 @@
-﻿using GameTemplate;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using SharpDX.MediaFoundation;
 using System;
 using System.Collections.Generic;

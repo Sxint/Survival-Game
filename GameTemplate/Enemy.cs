@@ -3,9 +3,8 @@ using System.Threading.Tasks.Sources;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Survive;
 
-namespace GameTemplate
+namespace Survive
 {
     public class Enemy : DrawableGameComponent
     {
@@ -56,15 +55,15 @@ namespace GameTemplate
 
 
         public Enemy(Game game, SpriteBatch spriteBatch,
-            Texture2D tex, int Speed, int Jump, Vector2 newPosition , Player Player) : base(game)
+            Texture2D tex, int Speed, int Jump, Vector2 newPosition, Player Player) : base(game)
         {
             this.game = game;
             this.spriteBatch = spriteBatch;
             this.tex = tex;
             position = newPosition;
-            this.speed = Speed;
-            this.jump = Jump;
-            this.player = Player;
+            speed = Speed;
+            jump = Jump;
+            player = Player;
             enemyWidth = tex.Width / 3;
             enemyHeight = 50;
         }
@@ -86,7 +85,7 @@ namespace GameTemplate
 
             }
 
-            if(health <= 0)
+            if (health <= 0)
             {
                 isDead = true;
             }
@@ -100,12 +99,12 @@ namespace GameTemplate
             }
 
             position.Y += gravity;
-            if (getBounds().Contains(player.position.X + player.playerWidth, player.position.Y) && time >= 1 || 
+            if (getBounds().Contains(player.position.X + player.playerWidth, player.position.Y) && time >= 1 ||
                 getBounds().Contains(player.position.X - player.playerWidth, player.position.Y) && time >= 1)
             {
-                    player.health -= 5;
-                    player.isHit = true;
-                    time = 0;
+                player.health -= 5;
+                player.isHit = true;
+                time = 0;
             }
             else
             {
@@ -200,7 +199,7 @@ namespace GameTemplate
 
             if (!isDead)
             {
-                spriteBatch.Draw(tex, position, new Rectangle((tex.Width / spriteSizeX * frameX) + 9, (tex.Height / spriteSizeY * frameY) + 9, enemyWidth, enemyHeight), Color.White);
+                spriteBatch.Draw(tex, position, new Rectangle(tex.Width / spriteSizeX * frameX + 9, tex.Height / spriteSizeY * frameY + 9, enemyWidth, enemyHeight), Color.White);
             }
 
             spriteBatch.DrawString(regular, health.ToString(), new Vector2(position.X, position.Y - 20), Color.White);
@@ -240,11 +239,11 @@ namespace GameTemplate
         }
 
 
-    //hitbox
-    public Rectangle getBounds()
+        //hitbox
+        public Rectangle getBounds()
         {
-           return new Rectangle((int)position.X, (int)position.Y, enemyWidth, enemyHeight);
-           //return new Rectangle((tex.Width / spriteSizeX * frameX) + 9, 9, enemyWidth, enemyHeight);
+            return new Rectangle((int)position.X, (int)position.Y, enemyWidth, enemyHeight);
+            //return new Rectangle((tex.Width / spriteSizeX * frameX) + 9, 9, enemyWidth, enemyHeight);
 
         }
     }

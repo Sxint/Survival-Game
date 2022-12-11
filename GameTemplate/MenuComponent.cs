@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace GameTemplate
+namespace Survive
 {
     public class MenuComponent : DrawableGameComponent
     {
@@ -33,7 +33,7 @@ namespace GameTemplate
             this.spriteBatch = spriteBatch;
             this.regularFont = regularFont;
             this.hilightFont = hilightFont;
-            menuItems = menus.ToList<string>();
+            menuItems = menus.ToList();
             position = new Vector2(Shared.stage.X / 2, Shared.stage.Y / 2);
             this.title=title;
         }
@@ -44,7 +44,7 @@ namespace GameTemplate
             if (ks.IsKeyDown(Keys.Down) && oldState.IsKeyUp(Keys.Down))
             {
                 selectedIndex++;
-                if (selectedIndex == menuItems.Count )
+                if (selectedIndex == menuItems.Count)
                 {
                     selectedIndex = 0;
                 }
@@ -68,12 +68,12 @@ namespace GameTemplate
             Vector2 tempPos = position;
 
             spriteBatch.Begin();
-            spriteBatch.DrawString(hilightFont,title, new Vector2 (500,200), hilightColor);
+            spriteBatch.DrawString(hilightFont, title, new Vector2(500, 200), hilightColor);
             for (int i = 0; i < menuItems.Count; i++)
             {
                 if (selectedIndex == i)
                 {
-                    spriteBatch.DrawString(hilightFont, menuItems[i], 
+                    spriteBatch.DrawString(hilightFont, menuItems[i],
                         tempPos, hilightColor);
                     tempPos.Y += hilightFont.LineSpacing;
                 }

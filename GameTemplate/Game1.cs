@@ -1,9 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Survive;
 
-namespace GameTemplate
+namespace Survive
 {
     public class Game1 : Game
     {
@@ -43,21 +42,21 @@ namespace GameTemplate
             // TODO: use this.Content to load your game content here
             //create scene instances here
             startScene = new StartScene(this);
-            this.Components.Add(startScene);
+            Components.Add(startScene);
             startScene.show();
 
             //create other scenes here
             helpScene = new HelpScene(this);
-            this.Components.Add(helpScene);
+            Components.Add(helpScene);
 
             actionScene = new ActionScene(this);
-            this.Components.Add(actionScene);
+            Components.Add(actionScene);
 
             aboutScene = new AboutScene(this);
-            this.Components.Add(aboutScene);
+            Components.Add(aboutScene);
 
             creditScene = new CreditScene(this);
-            this.Components.Add(creditScene);
+            Components.Add(creditScene);
 
 
 

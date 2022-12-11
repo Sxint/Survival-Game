@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace GameTemplate
+namespace Survive
 {
     public class Player : DrawableGameComponent
     {
@@ -68,8 +68,8 @@ namespace GameTemplate
             this.spriteBatch = spriteBatch;
             this.tex = tex;
             position = newPosition;
-            this.speed = Speed;
-            this.jump = Jump;
+            speed = Speed;
+            jump = Jump;
             this.jumpSound = jumpSound;
             playerWidth = tex.Width / 3;
             playerHeight = 34;
@@ -98,7 +98,7 @@ namespace GameTemplate
                     score++;
                     time = 0;
                 }
-                
+
             }
 
             // The active state from the last frame is now old
@@ -134,11 +134,11 @@ namespace GameTemplate
                 {
                     position.X += speed;
                     CreateFrames();
-                }    
+                }
                 isCollideLeft = false;
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Left) )
+            if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
                 if (position.X < 0)
                 {
@@ -162,7 +162,7 @@ namespace GameTemplate
 
             if (Keyboard.GetState().IsKeyDown(Keys.Tab))
             {
-                debugMode = true;                
+                debugMode = true;
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.CapsLock))
@@ -195,7 +195,7 @@ namespace GameTemplate
                 }
             }
 
-            
+
 
             base.Update(gameTime);
         }
@@ -228,7 +228,7 @@ namespace GameTemplate
         {
             SpriteFont regular = Game.Content.Load<SpriteFont>("fonts/regularFont");
             spriteBatch.Begin();
-            spriteBatch.Draw(tex, position, new Rectangle((tex.Width / spriteSizeX * frameX) + 9 ,(tex.Height / spriteSizeY * frameY) + 9 ,playerWidth, playerHeight), Color.White);
+            spriteBatch.Draw(tex, position, new Rectangle(tex.Width / spriteSizeX * frameX + 9, tex.Height / spriteSizeY * frameY + 9, playerWidth, playerHeight), Color.White);
             spriteBatch.End();
             base.Draw(gameTime);
         }
@@ -237,7 +237,7 @@ namespace GameTemplate
         //hitbox
         public Rectangle getBounds()
         {
-           return new Rectangle((int)position.X, (int)position.Y, playerWidth, playerHeight);
+            return new Rectangle((int)position.X, (int)position.Y, playerWidth, playerHeight);
 
         }
     }

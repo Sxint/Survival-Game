@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace GameTemplate
+namespace Survive
 {
     public class HelpScene : GameScene
     {
@@ -18,7 +18,7 @@ namespace GameTemplate
         public HelpScene(Game game) : base(game)
         {
             g = (Game1)game;
-            this.spriteBatch = g._spriteBatch;
+            spriteBatch = g._spriteBatch;
             tex = g.Content.Load<Texture2D>("images/Help");
         }
 
