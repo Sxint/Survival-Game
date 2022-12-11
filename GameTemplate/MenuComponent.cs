@@ -14,6 +14,7 @@ namespace GameTemplate
         private SpriteBatch spriteBatch;
         private SpriteFont regularFont, hilightFont;
         private List<string> menuItems;
+        private string title;
         private Vector2 position;
         private Color regularColor = Color.Black;
         private Color hilightColor = Color.Red;
@@ -25,7 +26,8 @@ namespace GameTemplate
             SpriteBatch spriteBatch,
             SpriteFont regularFont,
             SpriteFont hilightFont,
-            string[] menus) : base(game)
+            string[] menus,
+            string title) : base(game)
         {
 
             this.spriteBatch = spriteBatch;
@@ -33,6 +35,7 @@ namespace GameTemplate
             this.hilightFont = hilightFont;
             menuItems = menus.ToList<string>();
             position = new Vector2(Shared.stage.X / 2, Shared.stage.Y / 2);
+            this.title=title;
         }
 
         public override void Update(GameTime gameTime)
@@ -65,6 +68,7 @@ namespace GameTemplate
             Vector2 tempPos = position;
 
             spriteBatch.Begin();
+            spriteBatch.DrawString(hilightFont,title, new Vector2 (500,200), hilightColor);
             for (int i = 0; i < menuItems.Count; i++)
             {
                 if (selectedIndex == i)

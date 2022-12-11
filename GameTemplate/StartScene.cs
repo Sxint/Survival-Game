@@ -19,6 +19,7 @@ namespace GameTemplate
 
         private SpriteBatch spriteBatch;
         Game1 g;
+        string title = "Ohio Simulator";
         string[] menuItems = {"Start", "Help", "About", "Credit", "Quit" };
 
 
@@ -29,7 +30,7 @@ namespace GameTemplate
             //instantiate menu here
             SpriteFont regular = g.Content.Load<SpriteFont>("fonts/regularFont");
             SpriteFont hilight = game.Content.Load<SpriteFont>("fonts/hilightFont");
-            menu = new MenuComponent(game, spriteBatch, regular, hilight, menuItems);
+            menu = new MenuComponent(game, spriteBatch, regular, hilight, menuItems, title);
             this.components.Add(menu);
 
 
