@@ -24,6 +24,7 @@ namespace GameTemplate
         private Enemy enemy;
         private List<Platform> platforms = new List<Platform>();
         public EnemyCollisionManager enemyCollisionManager;
+      
 
         public ActionScene(Game game) : base(game)
         {
@@ -32,12 +33,15 @@ namespace GameTemplate
             platforms = new List<Platform>();
             Texture2D platformTex = g.Content.Load<Texture2D>("images/player");
             Texture2D playerTex = g.Content.Load<Texture2D>("images/marine");
-            Texture2D enemyTex = g.Content.Load<Texture2D>("images/zerglig");
+            Texture2D enemyTex = g.Content.Load<Texture2D>("images/zerglig");  
             SoundEffect jumpSound = g.Content.Load<SoundEffect>("songs/jump");
+           
+           
             Vector2 playerPos = new Vector2(Shared.stage.X / 2 - platformTex.Width / 2,Shared.stage.Y - playerTex.Height);
             Vector2 enemyPos = new Vector2((Shared.stage.X / 2 - platformTex.Width / 2) + 1100 , Shared.stage.Y - enemyTex.Height);
             Vector2 platformPos = new Vector2(200, Shared.stage.Y - platformTex.Height);
             Vector2 platformPos2 = new Vector2(800, Shared.stage.Y - platformTex.Height);
+          
 
             platform2 = new Platform(game, spriteBatch, platformTex, platformPos2);
             platform = new Platform(game, spriteBatch, platformTex, platformPos);
@@ -61,10 +65,14 @@ namespace GameTemplate
             this.components.Add(enemy);
             this.components.Add(Collisionmanager);
             this.components.Add(enemyCollisionManager);
+          
         }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
         }
+
+      
     }
 }
