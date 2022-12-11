@@ -54,6 +54,8 @@ namespace GameTemplate
 
         public bool shoot;
 
+        public bool debugMode;
+
         private SoundEffect jumpSound;
 
         public MouseState lastMouseState;
@@ -84,7 +86,8 @@ namespace GameTemplate
 
             if (health <= 0)
             {
-                position = new Vector2(9803, 7589);
+                Enabled = false;
+                position = new Vector2(4589, 2364);
                 isDead = true;
             }
 
@@ -156,6 +159,17 @@ namespace GameTemplate
                 CreateFrames();
             }
 
+            if (Keyboard.GetState().IsKeyDown(Keys.Tab))
+            {
+                debugMode = true;                
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.CapsLock))
+            {
+                debugMode = false;
+            }
+
+
             if (hasjumped == true)
             {
                 float i = jump;
@@ -213,28 +227,7 @@ namespace GameTemplate
         {
             SpriteFont regular = Game.Content.Load<SpriteFont>("fonts/regularFont");
             spriteBatch.Begin();
-            //spriteBatch.Draw(tex, position, null, Color.White);
             spriteBatch.Draw(tex, position, new Rectangle((tex.Width / spriteSizeX * frameX) + 9 ,(tex.Height / spriteSizeY * frameY) + 9 ,playerWidth, playerHeight), Color.White);
-
-            //healthbar
-
-
-            //spriteBatch.Draw(tex, position, null, Color.White, playerRotation, playerOrigin, 1, SpriteEffects.None, 1);
-            spriteBatch.DrawString(regular, position.Y.ToString(), new Vector2(position.X, position.Y), Color.White);
-            spriteBatch.DrawString(regular, "isCollideUp: " + isCollideUp.ToString(), new Vector2(0, 0), Color.White);
-            spriteBatch.DrawString(regular, "isCollideLeft: " + isCollideLeft.ToString(), new Vector2(0, 20), Color.White);
-            spriteBatch.DrawString(regular, "isCollideRight: " + isCollideRight.ToString(), new Vector2(0, 40), Color.White);
-            spriteBatch.DrawString(regular, "HasJump: " + hasjumped.ToString(), new Vector2(0, 60), Color.White);
-            spriteBatch.DrawString(regular, "Player X Position: " + position.X.ToString(), new Vector2(0, 80), Color.White);
-            spriteBatch.DrawString(regular, "Player Y Position: " + position.Y.ToString(), new Vector2(0, 100), Color.White);
-            spriteBatch.DrawString(regular, "isHit: " + isHit.ToString(), new Vector2(0, 300), Color.White);
-            spriteBatch.DrawString(regular, "Health: " + health.ToString(), new Vector2(0, 320), Color.White);
-            spriteBatch.DrawString(regular, "platform: " + platform.ToString(), new Vector2(0, 340), Color.White);
-            spriteBatch.DrawString(regular, "Time alive: " + timeTotal.ToString(), new Vector2(0, 400), Color.White);
-            spriteBatch.DrawString(regular, "Score: " + score.ToString(), new Vector2(0, 420), Color.White);
-            spriteBatch.DrawString(regular, "isShooting?: " + shoot.ToString(), new Vector2(0, 440), Color.White);
-
-
             spriteBatch.End();
             base.Draw(gameTime);
         }
@@ -244,7 +237,6 @@ namespace GameTemplate
         public Rectangle getBounds()
         {
            return new Rectangle((int)position.X, (int)position.Y, playerWidth, playerHeight);
-           //return new Rectangle((tex.Width / spriteSizeX * frameX) + 9, 9, playerWidth, playerHeight);
 
         }
     }

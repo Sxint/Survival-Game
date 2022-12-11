@@ -34,12 +34,6 @@ namespace GameTemplate
             SpriteFont regular = Game.Content.Load<SpriteFont>("fonts/regularFont");
             spriteBatch.Begin();
             spriteBatch.Draw(tex, position, Color.White);
-            spriteBatch.Draw(tex, getTopBounds(), Color.Gray);
-            spriteBatch.Draw(tex, getRightBounds(), Color.Red);
-            spriteBatch.Draw(tex, getLeftBounds(), Color.Blue);
-
-            spriteBatch.DrawString(regular, "Platform Left Position: " + getLeftBounds().Top.ToString(), new Vector2(500, 20), Color.White);
-
             spriteBatch.End();
             base.Draw(gameTime);
         }
