@@ -35,7 +35,7 @@ namespace GameTemplate
             Texture2D enemyTex = g.Content.Load<Texture2D>("images/zerglig");
             SoundEffect jumpSound = g.Content.Load<SoundEffect>("songs/jump");
             Vector2 playerPos = new Vector2(Shared.stage.X / 2 - batTex.Width / 2,Shared.stage.Y - playerTex.Height);
-            Vector2 enemyPos = new Vector2((Shared.stage.X / 2 - batTex.Width / 2) + 20 , Shared.stage.Y - enemyTex.Height);
+            Vector2 enemyPos = new Vector2((Shared.stage.X / 2 - batTex.Width / 2) + 1100 , Shared.stage.Y - enemyTex.Height);
             Vector2 platformPos = new Vector2(200, Shared.stage.Y - batTex.Height);
             Vector2 platformPos2 = new Vector2(800, Shared.stage.Y - batTex.Height);
 

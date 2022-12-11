@@ -82,7 +82,7 @@ namespace GameTemplate
 
             if (player.shoot)
             {
-                health--;
+                health -= 5;
             }
 
             if(health <= 0)
@@ -99,9 +99,10 @@ namespace GameTemplate
             }
 
             position.Y += gravity;
-            if (getBounds().Contains(player.position) && time >= 1)
+            if (getBounds().Contains(player.position.X + player.playerWidth, player.position.Y) && time >= 1 || 
+                getBounds().Contains(player.position.X - player.playerWidth, player.position.Y) && time >= 1)
             {
-                    player.health -= 1;
+                    player.health -= 5;
                     player.isHit = true;
                     time = 0;
             }
@@ -110,20 +111,20 @@ namespace GameTemplate
                 player.isHit = false;
             }
 
-            if (player.position.X <= position.X)
+            if (player.position.X <= position.X + enemyWidth)
             {
                 if (!isCollideLeft)
                 {
-                    position.X -= 4;
+                    position.X -= 3;
                 }
                 isCollideLeft = false;
             }
 
-            if (player.position.X >= position.X)
+            if (player.position.X + player.playerWidth/2 >= position.X)
             {
                 if (!isCollideLeft)
                 {
-                    position.X += 4;
+                    position.X += 3;
                 }
                 isCollideRight = false;
             }
