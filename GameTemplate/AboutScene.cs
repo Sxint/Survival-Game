@@ -22,7 +22,7 @@ namespace Survive
         {
             g = (Game1)game;
             this.spriteBatch = g._spriteBatch;
-            tex = g.Content.Load<Texture2D>("images/help2");
+            tex = g.Content.Load<Texture2D>("images/About");
         }
 
         public override void Draw(GameTime gameTime)

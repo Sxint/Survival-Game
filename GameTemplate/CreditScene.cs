@@ -1,25 +1,26 @@
-﻿using System;
+﻿using GameTemplate;
+using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace GameTemplate
+namespace Survive
 {
-    public class HelpScene : GameScene
+    public class CreditScene : GameScene
     {
         private SpriteBatch spriteBatch;
         private Texture2D tex;
         Game1 g;
 
-        public HelpScene(Game game) : base(game)
+        public CreditScene(Game game) : base(game)
         {
             g = (Game1)game;
             this.spriteBatch = g._spriteBatch;
-            tex = g.Content.Load<Texture2D>("images/Help");
+            tex = g.Content.Load<Texture2D>("images/Credits");
         }
 
         public override void Draw(GameTime gameTime)
@@ -29,5 +30,6 @@ namespace GameTemplate
             spriteBatch.End();
             base.Draw(gameTime);
         }
+
     }
 }
