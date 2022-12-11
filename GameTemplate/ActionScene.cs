@@ -35,6 +35,7 @@ namespace GameTemplate
             Texture2D playerTex = g.Content.Load<Texture2D>("images/marine");
             Texture2D enemyTex = g.Content.Load<Texture2D>("images/zerglig");  
             SoundEffect jumpSound = g.Content.Load<SoundEffect>("songs/jump");
+            SoundEffect gunSound = g.Content.Load<SoundEffect>("songs/gunSound");
            
            
             Vector2 playerPos = new Vector2(Shared.stage.X / 2 - platformTex.Width / 2,Shared.stage.Y - playerTex.Height);
@@ -54,7 +55,7 @@ namespace GameTemplate
             int enemyJumpStrength = 3;
 
            
-            player = new Player(game, spriteBatch, playerTex,  playerSpeed, playerJumpStrength, playerPos, "test", jumpSound);
+            player = new Player(game, spriteBatch, playerTex,  playerSpeed, playerJumpStrength, playerPos, "test", jumpSound, gunSound);
             enemy = new Enemy(game, spriteBatch, enemyTex, playerSpeed, enemyJumpStrength, enemyPos, "test", player);
             Collisionmanager = new CollisionManager(g, player, platforms);
             enemyCollisionManager = new EnemyCollisionManager(g, enemy, platforms);

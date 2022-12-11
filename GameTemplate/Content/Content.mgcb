@@ -111,6 +111,12 @@
 /processorParam:TextureFormat=Color
 /build:images/zerglig.png
 
+#begin songs/gunsound.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:songs/gunsound.wav
+
 #begin songs/InGameMusic.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
