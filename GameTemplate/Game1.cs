@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Survive;
 
 namespace GameTemplate
 {
@@ -12,6 +13,8 @@ namespace GameTemplate
         private StartScene startScene;
         private HelpScene helpScene;
         private ActionScene actionScene;
+        private AboutScene aboutScene;
+        private CreditScene creditScene;
 
 
         public Game1()
@@ -50,7 +53,13 @@ namespace GameTemplate
             actionScene = new ActionScene(this);
             this.Components.Add(actionScene);
 
-            
+            aboutScene = new AboutScene(this);
+            this.Components.Add(aboutScene);
+
+            creditScene = new CreditScene(this);
+            this.Components.Add(creditScene);
+
+
 
 
         }
@@ -86,6 +95,16 @@ namespace GameTemplate
                     hideAllScenes();
                     helpScene.show();
                 }
+                else if (selectedIndex == 2 && ks.IsKeyDown(Keys.Enter))
+                {
+                    hideAllScenes();
+                    aboutScene.show();
+                }
+                else if (selectedIndex == 3 && ks.IsKeyDown(Keys.Enter))
+                {
+                    hideAllScenes();
+                    creditScene.show();
+                }
                 //take care of other transitions;
 
                 else if (selectedIndex == 4 && ks.IsKeyDown(Keys.Enter))
@@ -94,7 +113,7 @@ namespace GameTemplate
                 }
 
             }
-            if (actionScene.Enabled || helpScene.Enabled)
+            if (actionScene.Enabled || helpScene.Enabled || aboutScene.Enabled || creditScene.Enabled)
             {
                 if (ks.IsKeyDown(Keys.Escape))
                 {
