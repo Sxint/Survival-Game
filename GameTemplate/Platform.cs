@@ -18,8 +18,6 @@ namespace GameTemplate
 
         public Vector2 position;
 
-        public string test { get; set; }
-
         public Platform(Game game, SpriteBatch spriteBatch,
         Texture2D tex, Vector2 Position) : base(game)
         {
